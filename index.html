@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio — Diseño UX/UI y desarrollo web</title>
+<meta name="description" content="Portfolio de Claudia Ramírez · Aterriza Studio: diseño UX/UI y desarrollo web desde Valencia.">
+<link rel="stylesheet" href="base.css?v=1793042960">
+<style>
+  /* GALERÍA — una sola pantalla: los proyectos son una baraja que se recorre con la rueda, las flechas o el dedo. */
+  html,body{ height:100%; overflow:hidden; }
+  .escenario{ position:fixed; inset:0; }
+  .izq{ display:flex; align-items:center; gap:18px; }
+  .reloj{ font-size:.8125rem; color:var(--g3); font-variant-numeric:tabular-nums; }
+  .indice{ position:fixed; left:var(--pad); bottom:var(--pad); z-index:20; list-style:none; padding:0; display:flex; flex-direction:column; gap:1px; font-size:.8125rem; }
+  .indice button{ text-align:left; color:#c4c4c4; padding:3px 0; transition:color .3s ease; }
+  .indice button:hover{ color:var(--g3); }
+  .indice button[aria-current="true"]{ color:var(--ink); }
+  .meta-d{ position:fixed; right:var(--pad); top:50%; z-index:20; transform:translateY(-50%); font-size:.8125rem; text-align:right; max-width:22ch; line-height:1.35; }
+  .meta-d b{ display:block; font-weight:500; }
+  .meta-d span{ color:var(--g3); }
+  .cuenta{ position:fixed; right:var(--pad); bottom:var(--pad); z-index:20; font-size:.8125rem; color:var(--g3); font-variant-numeric:tabular-nums; }
+  .ayuda{ position:fixed; left:50%; bottom:var(--pad); transform:translateX(-50%); z-index:20; font-size:.75rem; color:var(--g3); display:flex; gap:8px; align-items:center; white-space:nowrap; }
+  .ayuda kbd{ font:inherit; padding:2px 8px; border-radius:999px; background:var(--g1); }
+
+  /* the deck: landscape cards on desktop (the site is seen on a landscape screen), portrait on mobile */
+  .baraja{ position:absolute; inset:0; display:grid; place-items:center; perspective:1400px; }
+  .carta{ position:absolute; width:min(52vw,780px,(100svh - 290px) * 1.6); aspect-ratio:16/10; border-radius:6px; background:var(--g1); overflow:hidden; will-change:transform,opacity,filter; cursor:pointer; transition:transform .85s var(--ease), opacity .6s ease, filter .6s ease; }
+  .carta picture{ display:contents; } .carta .cov{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform 1s var(--ease); } .carta:hover .cov{ transform:scale(1.03); }
+  .carta .mk{ position:absolute; inset:0; }
+  .carta .mk .l{ position:absolute; left:8%; width:64%; top:13%; }
+  .carta .mk .m{ position:absolute; right:9%; bottom:9%; width:15.5%; }
+  .carta .dev-screen img{ animation-play-state:paused; }
+  @media (hover:hover){ .carta:hover .dev-screen img{ animation-play-state:running; } }
+  .carta .nom{ position:absolute; left:var(--pad); bottom:var(--pad); transform:none; padding:9px 18px; border-radius:999px; background:#fff; font-size:.8125rem; font-weight:500; white-space:nowrap; opacity:0; transition:opacity .35s ease; box-shadow:0 8px 24px -14px rgba(0,0,0,.3); }
+  .carta .nom i{ font-style:normal; margin-left:6px; display:inline-block; transition:transform .3s var(--ease); }
+  .carta:hover .nom i{ transform:translateX(3px); }
+  .carta.act .nom{ opacity:1; }
+  .carta .sf{ position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:16px; color:var(--g3); font-size:.75rem; letter-spacing:.06em; text-transform:uppercase; }
+  .carta .tit{ position:absolute; left:0; right:0; top:34%; text-align:center; font-stretch:125%; font-weight:800; letter-spacing:-.03em; line-height:1; font-size:clamp(1.8rem,4.4vw,3.6rem); padding:0 6%; color:#d2d2d2; }
+  .carta .tit + .sf{ top:56%; align-content:start; }
+
+  /* list view: the same five, as a simple column */
+  .vista-lista .baraja, .vista-lista .meta-d, .vista-lista .ayuda, .vista-lista .cuenta, .vista-lista .indice{ display:none; }
+
+  /* VISTA LISTA — como la tabla «Projects» de la referencia: etiquetas grises, texto normal, vista previa al pasar el cursor */
+  .lista-v{ display:none; position:absolute; inset:0; overflow:auto; padding:calc(var(--bar) + 16px) var(--pad) 96px; }
+  .vista-lista .lista-v{ display:block; }
+  .lt{ width:100%; max-width:1320px; margin:0 auto; }
+  .lt-h, .lt-r{ display:grid; grid-template-columns:3rem minmax(0,1.3fr) minmax(0,1.7fr) 6rem; gap:0 16px; align-items:baseline; padding:13px 0; font-size:.9375rem; line-height:1.35; }
+  .lt-h{ color:var(--g3); font-size:.8125rem; padding-top:0; border-bottom:1px solid var(--ink); }
+  .lt-r{ border-bottom:1px solid var(--g2); transition:opacity .3s ease; }
+  .lt-r b{ font-weight:500; } .lt-r .c{ color:var(--g3); } .lt-r .nm{ color:var(--ink); }
+  .lt-th{ display:none; }
+  @media (hover:hover){ .lt:hover .lt-r:not(:hover){ opacity:.35; } }
+  .lp{ position:fixed; z-index:40; left:0; top:0; width:min(28vw,360px); aspect-ratio:16/10; border-radius:6px; background:var(--g1); pointer-events:none; opacity:0; transform:translate3d(0,0,0) scale(.94); transition:opacity .25s ease; overflow:hidden; }
+  .lp.on{ opacity:1; }
+  .pvi{ position:absolute; inset:0; opacity:0; transition:opacity .2s ease; } .pvi.on{ opacity:1; }
+
+  /* SOBRE MÍ — desplegable con todo: información, habilidades, trabajo, formación y contacto */
+  .dd .panel.ab{ padding:18px 20px 20px; border-radius:16px; max-height:calc(100svh - var(--bar) - 24px); overflow:auto; scrollbar-width:thin; font-size:.8125rem; line-height:1.45; color:var(--ink); }
+  .ab h3{ font-size:.8125rem; font-weight:400; color:var(--g3); margin:0 0 6px; }
+  .ab section + section{ margin-top:20px; }
+  .ab .lead{ font-size:.875rem; line-height:1.5; max-width:62ch; }
+  .ab .lead + .lead{ margin-top:8px; }
+  .ab .rw{ display:grid; grid-template-columns:6.6rem minmax(0,1fr); gap:10px; padding:5px 0; }
+  .ab .rw > span:first-child{ color:var(--g3); font-variant-numeric:tabular-nums; }
+  .ab .rw small{ display:block; color:var(--g3); font-size:.75rem; line-height:1.4; margin-top:1px; }
+  .ab .rw b{ font-weight:500; }
+  .ab ul{ list-style:none; padding:0; } .ab ul li{ padding:1px 0; }
+  .ab .links{ display:flex; flex-direction:column; align-items:flex-start; gap:2px; } .ab .links a{ border-bottom:1px solid var(--ink); } .ab .links a:hover{ border-bottom-color:transparent; }
+  .dd .panel.ab#ab{ width:min(800px,calc(100vw - 2 * var(--pad))); display:grid; grid-template-columns:1fr 1fr; gap:0 36px; align-items:start; } .ab section + section{ margin-top:20px; } .ab .col{ min-width:0; } .ab .col section:first-child{ margin-top:0; }
+
+  /* SERVICIOS — desplegable de la barra */
+  .dd .panel.sv{ width:min(380px,calc(100vw - 2 * var(--pad))); padding:16px 20px 18px; border-radius:16px; font-size:.8125rem; line-height:1.45; }
+  .sv .it + .it{ margin-top:12px; } .sv .it b{ display:block; font-weight:500; } .sv .it span{ display:block; color:var(--g3); }
+  .sv .cta{ display:inline-block; margin-top:18px; border-bottom:1px solid var(--ink); } .sv .cta:hover{ border-bottom-color:transparent; }
+
+  /* ----- responsive: desktop > 1024 · tablet 641–1024 · mobile ≤ 640 ----- */
+  @media (max-width:1180px){ .reloj{ display:none; } }
+  @media (max-width:1024px){
+    .carta{ width:min(80vw,720px,(100svh - 300px) * 1.6); }
+    .meta-d{ top:auto; bottom:calc(var(--pad) + 74px); right:auto; left:var(--pad); text-align:left; transform:none; max-width:none; }
+    .indice{ flex-direction:row; flex-wrap:wrap; gap:4px 14px; bottom:var(--pad); right:80px; }
+    .ayuda{ display:none; }
+
+    /* About: a full-width sheet under the bar, in two columns */
+    .dd#dd-sobre .panel.ab{ position:fixed; left:var(--pad); right:var(--pad); top:calc(var(--bar) - 4px); width:auto !important; min-width:0; transform-origin:top center; display:grid !important; grid-template-columns:1fr 1fr; gap:0 32px; align-items:start; }
+    .dd .panel.sv{ right:0; }
+  }
+  @media (max-width:640px){
+    .lt-h{ display:none; } .lt-r{ grid-template-columns:1.8rem minmax(0,1fr) 84px; grid-template-areas:"n nm th" "n rl th" "n dt th"; gap:2px 12px; padding:14px 0; align-items:start; }
+    .lt-r > :nth-child(1){ grid-area:n; } .lt-r > :nth-child(2){ grid-area:nm; } .lt-r > :nth-child(3){ grid-area:rl; font-size:.8125rem; } .lt-r > :nth-child(4){ grid-area:dt; font-size:.8125rem; } .lt-r .lt-th{ grid-area:th; display:block; position:relative; aspect-ratio:16/10; border-radius:5px; overflow:hidden; align-self:center; }
+    .bar.multi{ flex-wrap:wrap; align-content:center; justify-content:flex-start; column-gap:8px; row-gap:8px; padding-top:10px; padding-bottom:10px; }
+    .bar.multi .izq{ flex:1 1 calc(100% - 52px); min-width:0; order:1; }
+    .bar.multi .menus{ display:contents; }
+    .bar.multi #dd-idioma{ order:2; }
+    .bar.multi .dd:not(#dd-idioma){ order:3; }
+    .v-pre{ display:none; }
+    .carta{ width:min(74vw,340px,(100svh - 320px) * .8); aspect-ratio:4/5; }
+    .carta .mk .l{ left:5%; width:90%; top:20%; } .carta .mk .m{ right:8%; bottom:12%; width:32%; }
+    .carta .nom{ left:50%; transform:translateX(-50%); bottom:5%; }
+    .meta-d{ bottom:calc(var(--pad) + 70px); }
+    .indice{ right:var(--pad); } .cuenta{ bottom:calc(var(--pad) + 70px); }
+
+    .dd > button{ min-width:0; }
+    /* every dropdown becomes a sheet under the header */
+    .dd .panel{ position:fixed; left:var(--pad); right:var(--pad); top:calc(var(--bar) - 2px); width:auto !important; min-width:0; transform-origin:top center; max-height:calc(100svh - var(--bar) - 12px); overflow:auto; }
+    .dd .panel.mini-p{ left:auto; width:74px !important; top:58px; }
+    .dd#dd-sobre .panel.ab{ display:block !important; } .ab .col + .col{ margin-top:20px; } .ab .rw{ grid-template-columns:5.6rem minmax(0,1fr); }
+  }
+  @media (max-width:420px){ .bar.multi{ column-gap:6px; } .bar.multi .pill{ padding:0 11px; gap:6px; } .izq{ gap:0; } }
+  @media (max-width:360px){ .bar.multi .pill{ padding:0 9px; font-size:.75rem; } }
+</style>
+</head>
+<body class="cargando">
+<!--
+THESIS: un portfolio de una sola pantalla: los proyectos son una baraja, no una página. Se rechaza la home con secciones apiladas que hay que recorrer.
+OWN-WORLD: blanco, pastillas gris muy claro, texto negro pequeño y un índice a la izquierda en el que el activo es negro; la baraja con profundidad suave.
+STORY: ves los cinco proyectos con un gesto, pasas el cursor y cobran vida, abres el que te interesa; «Sobre mí» hace de CV.
+FIRST VIEWPORT: tras la carga, una baraja de cinco cartas con el mockup de Camelia delante, índice abajo a la izquierda, nombre y categoría a la derecha.
+FORM: baraja con índice, elegida por la usuaria entre tres propuestas. Semilla: referencias pinned por la usuaria.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+<header class="bar multi">
+  <div class="izq"><span id="quien"></span><span class="reloj" id="reloj" aria-hidden="true"></span></div>
+  <nav class="menus" id="menus"></nav>
+</header>
+
+<main class="escenario" id="esc">
+  <div class="baraja" id="baraja" aria-live="polite"></div>
+  <div class="lista-v" id="lista-v"></div>
+  <p class="meta-d" id="meta-d"></p>
+  <ul class="indice" id="indice"></ul>
+  <span class="cuenta" id="cuenta" aria-hidden="true"></span>
+  <p class="ayuda" id="ayuda" aria-hidden="true"></p>
+</main>
+
+<script src="datos.js?v=1793216516"></script>
+<script src="comun.js?v=1793126133"></script>
+<script>
+(function(){
+  const D = DATOS, E = PORT.esc, $ = s => document.querySelector(s), N = D.proyectos.length;
+  const mq = "";
+  const t = PORT.t, chev = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4z"/></svg>';
+  $("#menus").setAttribute("aria-label", t("menu")); $("#indice").setAttribute("aria-label", t("proyectos"));
+  $("#menus").innerHTML = `<div class="dd" id="dd-vista"><button class="pill" aria-haspopup="true" aria-expanded="false"><span class="v-pre">${t("vista")}: </span><span id="vista-t">${t("galeria").toLowerCase()}</span>${chev}</button>
+      <div class="panel" role="menu"><button role="menuitemradio" aria-checked="true" data-v="galeria">${t("galeria")}</button><button role="menuitemradio" aria-checked="false" data-v="lista">${t("lista")}</button></div></div>
+    <div class="dd" id="dd-sobre"><button class="pill" aria-haspopup="true" aria-expanded="false">${t("sobre")}${chev}</button><div class="panel ab" id="ab"></div></div>
+    <div class="dd" id="dd-serv"><button class="pill" aria-haspopup="true" aria-expanded="false">${t("s_serv")}${chev}</button><div class="panel sv" id="sv"></div></div><div id="lang"></div>`;
+  PORT.idioma($("#lang")); $("#ayuda").innerHTML = `<kbd>↑</kbd><kbd>↓</kbd> ${t("ayuda")}`;
+  PORT.quien($("#quien")); PORT.reloj($("#reloj"));
+
+  // --- Sobre mí: desplegable en dos columnas (en móvil se apila en una)
+  const y = D.yo, sec = (t, b) => `<section><h3>${t}</h3>${b}</section>`;
+  const secs = {
+    info: sec(t("s_sobre"), `<p class="lead">${E(y.sobre)}</p>`),
+    hab: sec(t("s_hab"), `<div class="rw"><span>${t("s_habs")}</span><span>${y.habilidades.map(E).join(", ")}</span></div>` + y.herramientas.map(g => `<div class="rw"><span>${E(g[0])}</span><span>${g[1].map(E).join(", ")}</span></div>`).join("")),
+    exp: sec(t("s_exp"), y.experiencia.map(x => `<div class="rw"><span>${E(x[0])}</span><span><b>${E(x[1])}</b> · ${E(x[2])}${x[3] ? `<small>${E(x[3])}</small>` : ""}</span></div>`).join("")),
+    form: sec(t("s_for"), y.formacion.map(x => `<div class="rw"><span>${E(x[0])}</span><span><b>${E(x[1])}</b> · ${E(x[2])}</span></div>`).join("")),
+    idi: sec(t("s_idi"), y.idiomas.map(x => `<div class="rw"><span>${E(x[0])}</span><span>${E(x[1])}</span></div>`).join("")),
+    cont: sec(t("s_cont"), `<div class="links"><a href="mailto:${y.email}">${E(y.email)}</a><a href="${y.linkedin}" target="_blank" rel="noopener">LinkedIn ↗</a><a href="${y.instagram}" target="_blank" rel="noopener">Instagram ↗</a></div>`),
+  };
+  $("#ab").innerHTML = `<div class="col">${secs.info}${secs.hab}</div><div class="col">${secs.exp}${secs.form}${secs.idi}${secs.cont}</div>`;
+  $("#ab").addEventListener("click", e => e.stopPropagation());
+  $("#sv").innerHTML = y.servicios.map(x => `<div class="it"><b>${E(x[0])}</b><span>${E(x[1])}</span></div>`).join("") + `<a class="cta" href="mailto:${y.email}">${t("cta")}</a>`;
+  $("#sv").addEventListener("click", e => e.stopPropagation());
+
+  // --- deck
+  $("#baraja").innerHTML = D.proyectos.map((p, i) => `<a class="carta" data-i="${i}" href="proyecto.html?p=${p.slug}${mq}" aria-label="${E(p.nombre)}">${
+    p.cover ? `<picture>${p.coverM ? `<source media="(max-width:640px)" srcset="${p.coverM}">` : ""}<img class="cov" src="${p.cover}" alt="${t("imagen")} ${E(p.nombre)}"></picture>` : p.listo ? `<div class="mk" role="img" aria-label="Mockup de ${E(p.nombre)}"><div class="l">${PORT.laptop(p.laptop[0], "", i)}</div><div class="m">${PORT.phone(p.movil, "", i)}</div></div>`
+            : `<div class="tit">${E(p.nombre)}</div><div class="sf">${t("prep_corto")}</div>`}<span class="nom">${E(p.nombre)}<i aria-hidden="true">→</i></span></a>`).join("");
+  $("#indice").innerHTML = D.proyectos.map((p, i) => `<li><button data-i="${i}">${E(p.nombre)}</button></li>`).join("");
+  // vista lista: tabla con vista previa que sigue al cursor (como la tabla «Projects» de la referencia)
+  const nn = i => String(i + 1).padStart(2, "0");
+  const rows = D.proyectos.map((p, i) => `<a class="lt-r" href="proyecto.html?p=${p.slug}${mq}" data-i="${i}"><span class="c">${nn(i)}</span><b class="nm">${E(p.nombre)}</b><span class="c rl">${E(p.rol || p.cat)}</span><span class="c">${p.anio}</span><span class="lt-th">${PORT.mini(p)}</span></a>`).join("");
+  const head = `<div class="lt-h"><span>#</span><span>${t("proyecto")}</span><span>${t("rol")}</span><span>${t("fecha")}</span></div>`;
+  $("#lista-v").innerHTML = `<div class="lt">${head}${rows}</div><div class="lp" id="lp" aria-hidden="true">${D.proyectos.map((p, i) => `<div class="pvi" data-i="${i}">${PORT.mini(p)}</div>`).join("")}</div>`;
+  {
+    const lp = $("#lp"), pv = [...lp.querySelectorAll(".pvi")];
+    let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+    const loop = () => { x += (tx - x) * .18; y += (ty - y) * .18; lp.style.transform = `translate3d(${x}px,${y}px,0) scale(${lp.classList.contains("on") ? 1 : .94})`; raf = (Math.abs(tx - x) + Math.abs(ty - y) > .3 || lp.classList.contains("on")) ? requestAnimationFrame(loop) : 0; };
+    document.querySelectorAll("#lista-v .lt-r").forEach(r => {
+      r.addEventListener("pointerenter", e => { if(e.pointerType !== "mouse") return; pv.forEach(n => n.classList.toggle("on", +n.dataset.i === +r.dataset.i)); lp.classList.add("on"); if(!raf) raf = requestAnimationFrame(loop); });
+      r.addEventListener("pointerleave", () => lp.classList.remove("on"));
+      r.addEventListener("pointermove", e => { if(e.pointerType !== "mouse") return; tx = Math.min(e.clientX + 24, innerWidth - lp.offsetWidth - 16); ty = Math.min(Math.max(e.clientY - lp.offsetHeight / 2, 76), innerHeight - lp.offsetHeight - 16); if(!raf) raf = requestAnimationFrame(loop); });
+    });
+  }
+
+  const cartas = [...document.querySelectorAll(".carta")], btns = [...document.querySelectorAll("#indice button")];
+  let act = 0;
+  function pinta(){
+    cartas.forEach((c, i) => {
+      const d = i - act;                                   // 0 = on top; >0 = waiting behind; <0 = already gone, up and out
+      let tr, op, bl, z = 100 - Math.abs(d);
+      if(d === 0){ tr = "translate3d(0,0,0) scale(1)"; op = 1; bl = 0; }
+      else if(d > 0){ tr = `translate3d(0,${d * 34}px,${-d * 90}px) scale(${1 - d * .045})`; op = Math.max(0, 1 - d * .34); bl = d * .6; }
+      else { tr = `translate3d(0,${d * 56}px,${d * 60}px) scale(${1 + d * .03})`; op = Math.max(0, 1 + d * .6); bl = -d * 3; }
+      c.style.transform = tr; c.style.opacity = op; c.style.filter = bl ? `blur(${bl}px)` : "none"; c.style.zIndex = z;
+      c.classList.toggle("act", d === 0); c.tabIndex = d === 0 ? 0 : -1; c.style.pointerEvents = d === 0 ? "auto" : "none";
+    });
+    btns.forEach((b, i) => b.setAttribute("aria-current", i === act ? "true" : "false"));
+    const p = D.proyectos[act];
+    $("#meta-d").innerHTML = `<b>${E(p.tipo)}</b><span>${E(p.cat)} · ${p.anio}</span>`;
+    $("#cuenta").textContent = String(act + 1).padStart(2, "0") + " / " + String(N).padStart(2, "0");
+  }
+  const ir = n => { act = Math.max(0, Math.min(N - 1, n)); pinta(); };
+  const lock_ = () => document.body.classList.contains("vista-lista") || document.body.classList.contains("cargando") || !!document.querySelector("#dd-sobre.open");
+  btns.forEach(b => b.addEventListener("click", () => ir(+b.dataset.i)));
+  let lock = 0;
+  addEventListener("wheel", e => { if(lock_()) return; const now = performance.now(); if(now - lock < 520 || Math.abs(e.deltaY) < 8) return; lock = now; ir(act + (e.deltaY > 0 ? 1 : -1)); }, { passive:true });
+  addEventListener("keydown", e => { if(lock_()) return; if(["ArrowDown", "ArrowRight"].includes(e.key)) ir(act + 1); if(["ArrowUp", "ArrowLeft"].includes(e.key)) ir(act - 1); });
+  let y0 = null;
+  addEventListener("touchstart", e => { y0 = e.touches[0].clientY; }, { passive:true });
+  addEventListener("touchend", e => { if(y0 === null) return; const dy = y0 - e.changedTouches[0].clientY; y0 = null; if(Math.abs(dy) > 36 && !lock_()) ir(act + (dy > 0 ? 1 : -1)); }, { passive:true });
+  cartas.forEach(c => c.addEventListener("click", e => { if(+c.dataset.i !== act){ e.preventDefault(); ir(+c.dataset.i); } }));
+
+  // menus
+  PORT.menus();
+  document.querySelectorAll("#dd-vista [data-v]").forEach(b => b.addEventListener("click", () => {
+    const l = b.dataset.v === "lista"; document.body.classList.toggle("vista-lista", l); $("#vista-t").textContent = (l ? t("lista") : t("galeria")).toLowerCase();
+    document.querySelectorAll("#dd-vista [data-v]").forEach(x => x.setAttribute("aria-checked", x === b));
+  }));
+
+  // the deck assembles itself once the curtain is up
+  cartas.forEach(c => { c.style.transition = "none"; });
+  pinta(); cartas.forEach(c => { c.dataset.o = c.style.opacity; c.dataset.t = c.style.transform; c.style.opacity = 0; c.style.transform = "translate3d(0,140px,-260px) scale(.88)"; });
+  PORT.carga(() => {
+    cartas.forEach((c, i) => { c.style.transition = ""; setTimeout(() => { c.style.opacity = c.dataset.o; c.style.transform = c.dataset.t; }, 60 + (N - i) * 90); });
+  });
+})();
+</script>
+</body>
+</html>
