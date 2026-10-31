@@ -6,7 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Portfolio — Diseño UX/UI y desarrollo web</title>
 <meta name="description" content="Portfolio de Claudia Ramírez · Aterriza Studio: diseño UX/UI y desarrollo web desde Valencia.">
-<link rel="stylesheet" href="base.css?v=1793450592">
+<link rel="canonical" href="https://portfolio-three-mu-4veu8kpadj.vercel.app/">
+<meta property="og:type" content="website"><meta property="og:locale" content="es_ES"><meta property="og:site_name" content="Claudia Ramírez">
+<meta property="og:title" content="Claudia Ramírez — Portfolio"><meta property="og:description" content="Diseño UX/UI y desarrollo web desde Valencia.">
+<meta property="og:url" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/"><meta property="og:image" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/og/home.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Claudia Ramírez — Portfolio"><meta name="twitter:description" content="Diseño UX/UI y desarrollo web desde Valencia."><meta name="twitter:image" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/og/home.jpg">
+<link rel="stylesheet" href="base.css?v=1793454882">
 <style>
   /* GALERÍA — una sola pantalla: los proyectos son una baraja que se recorre con la rueda, las flechas o el dedo. */
   html,body{ height:100%; overflow:hidden; }
@@ -138,7 +143,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </main>
 
 <script src="datos.js?v=1793446367"></script>
-<script src="comun.js?v=1793452733"></script>
+<script src="comun.js?v=1793454882"></script>
 <script>
 (function(){
   const D = DATOS, E = PORT.esc, $ = s => document.querySelector(s), N = D.proyectos.length;
@@ -168,13 +173,13 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   $("#sv").addEventListener("click", e => e.stopPropagation());
 
   // --- deck
-  $("#baraja").innerHTML = D.proyectos.map((p, i) => `<a class="carta" data-i="${i}" href="proyecto.html?p=${p.slug}${mq}" aria-label="${E(p.nombre)}">${
+  $("#baraja").innerHTML = D.proyectos.map((p, i) => `<a class="carta" data-i="${i}" href="${p.slug}.html${mq}" aria-label="${E(p.nombre)}">${
     p.cover ? `<picture>${p.coverM ? `<source media="(max-width:640px)" srcset="${p.coverM}">` : ""}<img class="cov" src="${p.cover}" alt="${t("imagen")} ${E(p.nombre)}"></picture>` : p.listo ? `<div class="mk" role="img" aria-label="Mockup de ${E(p.nombre)}"><div class="l">${PORT.laptop(p.laptop[0], "", i)}</div><div class="m">${PORT.phone(p.movil, "", i)}</div></div>`
             : `<div class="tit">${E(p.nombre)}</div><div class="sf">${t("prep_corto")}</div>`}<span class="nom">${E(p.nombre)}<i aria-hidden="true">→</i></span></a>`).join("");
   $("#indice").innerHTML = D.proyectos.map((p, i) => `<li><button data-i="${i}">${E(p.nombre)}</button></li>`).join("");
   // vista lista: tabla con vista previa que sigue al cursor (como la tabla «Projects» de la referencia)
   const nn = i => String(i + 1).padStart(2, "0");
-  const rows = D.proyectos.map((p, i) => `<a class="lt-r" href="proyecto.html?p=${p.slug}${mq}" data-i="${i}"><span class="c">${nn(i)}</span><b class="nm">${E(p.nombre)}</b><span class="c rl">${E(p.rol || p.cat)}</span><span class="c">${p.anio}</span><span class="lt-th">${PORT.mini(p)}</span></a>`).join("");
+  const rows = D.proyectos.map((p, i) => `<a class="lt-r" href="${p.slug}.html${mq}" data-i="${i}"><span class="c">${nn(i)}</span><b class="nm">${E(p.nombre)}</b><span class="c rl">${E(p.rol || p.cat)}</span><span class="c">${p.anio}</span><span class="lt-th">${PORT.mini(p)}</span></a>`).join("");
   const head = `<div class="lt-h"><span>#</span><span>${t("proyecto")}</span><span>${t("rol")}</span><span>${t("fecha")}</span></div>`;
   $("#lista-v").innerHTML = `<div class="lt">${head}${rows}</div><div class="lp" id="lp" aria-hidden="true">${D.proyectos.map((p, i) => `<div class="pvi" data-i="${i}">${PORT.mini(p)}</div>`).join("")}</div>`;
   {

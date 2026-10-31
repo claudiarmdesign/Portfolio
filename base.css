@@ -108,3 +108,10 @@ body:not(.cargando) .entra{ opacity:1; transform:none; }
 .dd .panel button:hover{ background:#fff; }
 .dd .panel button[aria-checked="true"]::after{ content:"●"; font-size:.5rem; align-self:center; }
 
+
+/* cierre de las hojas: «¿Hablamos?» en grande, con el trazo fino del cargador */
+.contacto{ margin-top:clamp(64px,12vh,140px); border-top:1px solid var(--ink); padding-top:clamp(20px,3vw,36px); }
+.contacto .big{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; font-size:clamp(3rem,13vw,10.5rem); font-weight:200; letter-spacing:-.05em; line-height:.95; }
+.contacto .big i{ font-style:normal; font-weight:200; transition:transform .35s var(--ease); } .contacto .big:hover i, .contacto .big:focus-visible i{ transform:translateX(.12em); }
+.contacto .lk{ display:flex; flex-wrap:wrap; gap:6px 24px; margin-top:clamp(18px,3vw,32px); font-size:.9375rem; } .contacto .lk a{ border-bottom:1px solid var(--ink); } .contacto .lk a:hover{ border-bottom-color:transparent; }
+@media (prefers-reduced-motion:reduce){ .contacto .big i{ transition:none; } }

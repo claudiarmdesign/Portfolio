@@ -117,5 +117,14 @@
     el.addEventListener("click", out);
   }
 
-  window.PORT = { laptop, phone, mini, reloj, carga, quien, idioma, menus, t, lang, esc, q, reduced, marca };
+  // Cierre de cada hoja: «¿Hablamos?» en grande con el correo y las redes; se coloca justo antes de los botones Anterior / Siguiente
+  function contacto(){
+    const fin = document.querySelector(".fin"); if(!fin || document.querySelector(".contacto")) return;
+    const y = D.yo, big = lang === "en" ? "Shall we talk?" : "¿Hablamos?", lbl = lang === "en" ? "Contact" : "Contacto";
+    const s = document.createElement("section"); s.className = "contacto"; s.setAttribute("aria-label", lbl);
+    s.innerHTML = `<a class="big" href="mailto:${esc(y.email)}"><span>${big}</span><i aria-hidden="true">→</i></a><div class="lk"><a href="mailto:${esc(y.email)}">${esc(y.email)}</a><a href="${esc(y.linkedin)}" target="_blank" rel="noopener">LinkedIn ↗</a><a href="${esc(y.instagram)}" target="_blank" rel="noopener">Instagram ↗</a></div>`;
+    fin.before(s);
+  }
+
+  window.PORT = { laptop, phone, mini, reloj, carga, quien, idioma, menus, contacto, t, lang, esc, q, reduced, marca };
 })();

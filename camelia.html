@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Camelia Interiorismo — Claudia Ramírez</title>
+<meta name="description" content="Web de estudio de interiorismo: diseño UX/UI, front-end y SEO técnico para Camelia Interiorismo. Caso de estudio de Claudia Ramírez.">
+<link rel="canonical" href="https://portfolio-three-mu-4veu8kpadj.vercel.app/camelia">
+<meta property="og:type" content="article"><meta property="og:locale" content="es_ES"><meta property="og:site_name" content="Claudia Ramírez">
+<meta property="og:title" content="Camelia Interiorismo — Claudia Ramírez"><meta property="og:description" content="Web de estudio de interiorismo: diseño UX/UI, front-end y SEO técnico para Camelia Interiorismo. Caso de estudio de Claudia Ramírez."><meta property="og:url" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/camelia"><meta property="og:image" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/og/camelia.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Camelia Interiorismo — Claudia Ramírez"><meta name="twitter:description" content="Web de estudio de interiorismo: diseño UX/UI, front-end y SEO técnico para Camelia Interiorismo. Caso de estudio de Claudia Ramírez."><meta name="twitter:image" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/og/camelia.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="asistente.css?v=1792781446">
+<link rel="stylesheet" href="camelia.css?v=1793452941">
+<link rel="stylesheet" href="base.css?v=1793454882">
+<style>
+  /* HOJA DE PROYECTO — narrativa. Tipografía callada: etiquetas grises pequeñas y texto en peso normal. */
+  .shot{ background:var(--g1); border-radius:6px; overflow:hidden; display:flex; justify-content:center; align-items:flex-end; gap:clamp(14px,3vw,44px); padding:clamp(28px,6vw,84px) clamp(18px,5vw,72px) 0; }
+  .shot .l{ width:min(100%,760px); } .shot .m{ width:min(21%,200px); flex:none; margin-bottom:clamp(20px,3vw,44px); }
+  .shot.hero .l{ width:min(100%,840px); }
+  .shot.cover{ padding:0; display:block; } .shot.cover img{ width:100%; height:auto; }
+  .shot.mov{ padding-bottom:0; } .shot.mov .m{ width:min(36%,230px); margin-bottom:0; }
+
+  /* the row: Proyecto · Rol · Estado · Fecha, and right under it Herramientas · Enlace */
+  .mt{ display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:14px 16px; font-size:.9375rem; line-height:1.35; padding:calc(var(--bar) + 6px) var(--pad) 0; }
+  .mt dt{ color:var(--g3); margin-bottom:2px; } .mt dd{ color:var(--ink); }
+  .mt .c-p{ grid-column:1 / 5; } .mt .c-r{ grid-column:5 / 9; } .mt .c-e{ grid-column:9 / 11; } .mt .c-f{ grid-column:11 / 13; }
+  .mt .c-h{ grid-column:5 / 9; } .mt .c-l{ grid-column:9 / 13; }
+  .mt .c-h dd{ display:flex; flex-wrap:wrap; gap:0 12px; }
+  .mt a{ border-bottom:1px solid var(--ink); } .mt a:hover{ border-bottom-color:transparent; }
+  .mt .c-l dd{ display:flex; flex-wrap:wrap; gap:0 16px; }
+  .mt .c-p dd{ font-weight:500; }
+
+  .pn{ display:flex; gap:8px; flex-wrap:wrap; }
+  .pn .pill{ gap:14px; min-width:128px; justify-content:space-between; }
+  .tx{ font-size:.9375rem; line-height:1.5; max-width:46ch; }
+  .fases{ border-top:1px solid var(--ink); margin-top:20px; } .fase{ display:grid; grid-template-columns:2rem minmax(0,9.5rem) minmax(0,1fr); gap:0 14px; padding:13px 0; border-bottom:1px solid var(--g2); font-size:.9375rem; line-height:1.5; } .fase i{ font-style:normal; color:var(--g3); font-size:.75rem; padding-top:3px; } .fase b{ font-weight:500; } .fase p{ max-width:56ch; }
+  @media (max-width:640px){ .fase{ grid-template-columns:2rem 1fr; } .fase p{ grid-column:2; } }
+  .lst{ list-style:none; padding:0; font-size:.9375rem; line-height:1.45; max-width:50ch; } .lst li + li{ margin-top:8px; } .lst b{ font-weight:500; }
+  .lst .m{ color:var(--g3); }
+
+  .f2{ padding:clamp(28px,6vh,56px) var(--pad) 120px; }
+  .f2 .intro{ font-size:clamp(1.125rem,1.8vw,1.5rem); line-height:1.35; max-width:36ch; }
+  .f2 .shot{ margin-top:clamp(24px,5vh,56px); }
+  .sec{ display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:16px; margin-top:clamp(48px,10vh,110px); }
+  .sec > h2{ font-size:.8125rem; font-weight:400; color:var(--g3); position:sticky; top:calc(var(--bar) + 12px); align-self:start; }
+  .sec .c > * + *{ margin-top:clamp(14px,2.4vh,26px); }
+  .sec .tx{ font-size:.9375rem; max-width:50ch; }
+  .sec .lst{ font-size:.9375rem; line-height:1.5; max-width:50ch; }
+  .rej{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(12px,2vw,24px); }
+  .rej .shot{ margin:0; padding:clamp(18px,3vw,40px) clamp(16px,3vw,40px) 0; } .rej .shot .l{ width:100%; }
+  .f2 .fin{ margin-top:clamp(64px,12vh,140px); }
+  @media (max-width:900px){
+    .sec{ grid-template-columns:1fr; } .sec > h2{ position:static; } .rej{ grid-template-columns:1fr; }
+    /* tablet: dos columnas siempre llenas — Proyecto | Fecha, Rol | Estado, Herramientas | Enlace */
+    .mt{ grid-template-columns:1fr 1fr; } .mt > div{ grid-column:auto !important; }
+    .mt .c-p{ order:1; } .mt .c-f{ order:2; } .mt .c-r{ order:3; } .mt .c-e{ order:4; } .mt .c-h{ order:5; } .mt .c-l{ order:6; }
+  }
+  @media (max-width:520px){
+    /* móvil: una sola columna a la izquierda, en el orden de lectura */
+    .mt{ grid-template-columns:1fr; } .mt > div{ order:0 !important; }
+  }
+</style>
+</head>
+<body>
+<!--
+THESIS: la hoja de proyecto se lee como una ficha silenciosa: datos arriba, texto a un lado, imágenes grandes dentro de su dispositivo. Se rechazan los titulares grandes y negros por fase.
+OWN-WORLD: la misma que la home: blanco, negro y grises; etiquetas grises pequeñas, texto en peso normal; el color lo ponen las imágenes y los mockups.
+STORY: lees de qué va, ves las pantallas y entiendes las decisiones; no hay un segundo nivel: la hoja es el proyecto.
+FIRST VIEWPORT: la fila Proyecto · Rol · Estado · Fecha (y debajo Herramientas · Enlace), la frase y la imagen principal.
+FORM: hoja narrativa, elegida por la usuaria entre lateral y narrativa.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->
+<header class="bar">
+  <div style="display:flex;align-items:center;gap:14px"><span id="quien"></span></div>
+  <nav class="nav"><a class="pill" id="todos" href="index.html"></a><div id="lang"></div></nav>
+</header>
+<main id="main"></main>
+<script>window.SLUG="camelia";</script>
+<script src="datos.js?v=1793446367"></script>
+<script src="asistente.js?v=1792781446"></script>
+<script src="capitulos.js?v=1793450592"></script>
+<script src="camelia.js?v=1793450592"></script>
+<script src="comun.js?v=1793454882"></script>
+<script>
+(function(){
+  const D = DATOS, E = PORT.esc, M = PORT, $ = s => document.querySelector(s);
+  const mq = "";
+  const slug = PORT.q("p") || window.SLUG || "camelia", i = Math.max(0, D.proyectos.findIndex(p => p.slug === slug)), p = D.proyectos[i];
+  const prev = D.proyectos[(i + D.proyectos.length - 1) % D.proyectos.length], next = D.proyectos[(i + 1) % D.proyectos.length];
+  const href = s => `${s}.html${mq}`;
+  document.title = p.nombre + " — " + M.marca;
+  const t = PORT.t; $("#todos").textContent = t("todos"); PORT.idioma($("#lang"));
+  PORT.quien($("#quien")); $("#todos").href = "index.html";
+
+  const enlaces = [p.sitio ? `<a href="${p.sitio[1]}" target="_blank" rel="noopener">${E(p.sitio[0])} ↗</a>` : "", p.figma ? `<a href="${p.figma[1]}" target="_blank" rel="noopener">Figma ↗</a>` : "", p.protoArriba && p.prototipo ? `<a href="${p.prototipo}" target="_blank" rel="noopener">${t("prototipo")} ↗</a>` : ""].filter(Boolean).join("") || "—";
+  const meta = `<dl class="mt"><div class="c-p"><dt>${t("proyecto")}</dt><dd>${E(p.nombre)}</dd></div><div class="c-r"><dt>${t("rol")}</dt><dd>${E(p.rol || "—")}</dd></div><div class="c-e"><dt>${t("estado")}</dt><dd>${t("completado")}</dd></div><div class="c-f"><dt>${t("fecha")}</dt><dd>${p.anio}</dd></div>
+    <div class="c-h"><dt>${t("herramientas")}</dt><dd>${p.herramientas ? p.herramientas.map(t => `<span>${E(t)}</span>`).join("") : "—"}</dd></div>${p.sinEnlace || (p.protoArriba && !p.prototipo) ? "" : `<div class="c-l"><dt>${t("enlace")}</dt><dd>${enlaces}</dd></div>`}</dl>`;
+  const pn = `<div class="pn"><a class="pill" href="${href(prev.slug)}"><span>${t("anterior")}</span><span aria-hidden="true">←</span></a><a class="pill" href="${href(next.slug)}"><span aria-hidden="true">→</span><span>${t("siguiente")}</span></a></div>`;
+
+  const hero = () => p.cover
+    ? `<div class="shot cover"><img src="${p.cover}" alt="${t("imagen")} ${E(p.nombre)}"></div>`
+    : `<div class="shot hero"><div class="l">${M.laptop(p.laptop[0], p.nombre)}</div><div class="m">${M.phone(p.movil, p.nombre + " mobile", 1)}</div></div>`;
+  const proceso = () => p.procesoFases ? `<p class="tx">${E(p.procesoIntro)}</p><div class="fases">${p.procesoFases.map((f, k) => `<div class="fase"><i>${String(k + 1).padStart(2, "0")}</i><b>${E(f[0])}</b><p>${E(f[1])}</p></div>`).join("")}</div>` : `<ul class="lst">${p.proceso.map(s => `<li><b>${E(s[0])}</b> · ${E(s[1])} <span class="m">${s[2].map(E).join(", ")}</span></li>`).join("")}</ul>`;
+  const dec = () => `<ul class="lst">${p.decisiones.map(d => `<li>${E(d)}</li>`).join("")}</ul>`;
+
+  const metaCol = `<dl class="mc"><div><dt>${t("proyecto")}</dt><dd>${E(p.nombre)}</dd></div><div><dt>${t("rol")}</dt><dd>${E(p.rol || "—")}</dd></div><div><dt>${t("estado")}</dt><dd>${t("completado")}</dd></div><div><dt>${t("fecha")}</dt><dd>${p.anio}</dd></div><div><dt>${t("herramientas")}</dt><dd>${p.herramientas ? p.herramientas.join(" · ") : "—"}</dd></div><div><dt>${t("enlace")}</dt><dd>${enlaces}</dd></div></dl>`;
+  if(p.capitulos && window.CAP && window.CAMELIA){ $("#main").innerHTML = (CAP.metaCover(p) ? "" : meta) + CAP.render(p, { t, E, pn, metaCol, meta }); PORT.menus(); document.querySelectorAll(".asp").forEach(h => window.ASIST && ASIST.mount(h, { lang: PORT.lang })); CAP.init(); CAMELIA.init(); PORT.contacto(); return; }
+  if(p.slug === "camelia" && window.CAMELIA){
+    // portada de la hoja: datos del proyecto en columna a la izquierda (bajan con el scroll hasta el final de la foto) y foto vertical a la derecha
+    $("#main").innerHTML = CAMELIA.render(p, { t, E, pn, metaCol, meta }); PORT.menus(); CAMELIA.init(); PORT.contacto(); return; }
+  let h = meta + `<div class="f2"><p class="intro">${E(p.frase)}</p>${hero()}`;
+  if(p.listo) h += `
+    <section class="sec"><h2>${t("reto")}</h2><div class="c"><p class="tx">${E(p.reto)}</p></div></section>
+    <section class="sec"><h2>${t("proceso")}</h2><div class="c">${proceso()}</div></section>
+    <section class="sec"><h2>${t("solucion")}</h2><div class="c"><p class="tx">${E(p.solucion)}</p><div class="rej">${[1, 2, 3].map(k => `<div class="shot"><div class="l">${M.laptop(p.laptop[k], p.nombre + ", " + t("pantalla") + " " + (k + 1), k)}</div></div>`).join("")}<div class="shot mov"><div class="m">${M.phone(p.movil, "Mobile", 2)}</div></div></div></div></section>
+    <section class="sec"><h2>${t("decisiones")}</h2><div class="c">${dec()}</div></section>
+    <section class="sec"><h2>${t("resultado")}</h2><div class="c"><p class="tx">${E(p.resultado)}</p><p class="tx">${E(p.aprendi)}</p></div></section>`;
+  else h += `<section class="sec"><h2>${t("info")}</h2><div class="c"><p class="tx">${t("prep")}</p></div></section>`;
+  h += `<div class="fin">${pn}</div></div>`;
+  $("#main").innerHTML = h; PORT.menus(); PORT.contacto();
+})();
+</script>
+</body>
+</html>
