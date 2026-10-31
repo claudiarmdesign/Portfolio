@@ -53,6 +53,15 @@
     el.className = "who-w";
     el.innerHTML = `<a class="who" href="${href}">${esc(marca)}</a><span class="who-foto" aria-hidden="true"><img src="${D.yo.foto}" alt=""></span>`;
     // en pantallas táctiles no hay «hover»: al pulsar el nombre sale la foto y, un instante después, se hace lo de siempre (volver al inicio / recargar)
+    // además, en táctil la foto se asoma sola una vez por visita (cuando ya no está el cargador) para que se vea sin tener que pulsar
+    if(matchMedia("(hover:none)").matches){
+      let visto = false; try{ visto = sessionStorage.getItem("port-foto") === "1"; }catch(e){}
+      if(!visto){
+        const espera = setInterval(() => { if(document.body.classList.contains("cargando")) return; clearInterval(espera);
+          try{ sessionStorage.setItem("port-foto", "1"); }catch(e){}
+          setTimeout(() => { el.classList.add("abre"); setTimeout(() => el.classList.remove("abre"), 3200); }, 700); }, 200);
+      }
+    }
     if(matchMedia("(hover:none)").matches) el.querySelector(".who").addEventListener("click", e => {
       if(e.metaKey || e.ctrlKey || e.shiftKey || el.classList.contains("abre")) return;
       e.preventDefault(); el.classList.add("abre"); setTimeout(() => { location.href = href; }, reduced ? 300 : 1100);
@@ -89,7 +98,7 @@
     const ps = D.proyectos, N = ps.length;
     const el = document.createElement("div");
     el.className = "carga"; el.setAttribute("role", "status"); el.setAttribute("aria-label", t("carga"));
-    el.innerHTML = `<div class="ctop" aria-hidden="true"><span>${esc(marca)}</span><span>Portfolio '26</span></div>
+    el.innerHTML = `<div class="ctop" aria-hidden="true"><span>${esc(marca)}</span><span>Portfolio</span></div>
       <div class="c1" aria-hidden="true"><div class="cn"><span id="cn" lang="es">Hola</span></div><div class="cfoto">${ps.map((p, i) => `<div class="cf" data-i="${i}">${mini(p)}</div>`).join("")}</div></div>
       <div class="cpie" aria-hidden="true"><b id="cp"></b></div>`;
     document.body.classList.add("cargando"); document.body.prepend(el);
