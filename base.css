@@ -81,6 +81,7 @@ body.cargando{ overflow:hidden; }
 .who-w .who{ display:inline-block; padding:6px 0; }
 .who-foto{ position:absolute; left:0; top:calc(100% + 6px); width:112px; aspect-ratio:4/5; border-radius:10px; overflow:hidden; background:var(--g1); opacity:0; transform:translateY(-6px) scale(.94); transform-origin:top left; pointer-events:none; transition:opacity .2s ease, transform .3s var(--ease); box-shadow:0 18px 36px -20px rgba(0,0,0,.35); z-index:60; }
 .who-foto img{ width:100%; height:100%; object-fit:cover; }
+.who-w.abre .who-foto{ opacity:1; transform:none; }
 @media (hover:hover){ .who-w:hover .who-foto, .who-w .who:focus-visible + .who-foto{ opacity:1; transform:none; } }
 
 /* page entrance once the curtain is up */

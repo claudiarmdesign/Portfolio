@@ -52,6 +52,11 @@
   function quien(el, href = "index.html"){
     el.className = "who-w";
     el.innerHTML = `<a class="who" href="${href}">${esc(marca)}</a><span class="who-foto" aria-hidden="true"><img src="${D.yo.foto}" alt=""></span>`;
+    // en pantallas táctiles no hay «hover»: al pulsar el nombre sale la foto y, un instante después, se hace lo de siempre (volver al inicio / recargar)
+    if(matchMedia("(hover:none)").matches) el.querySelector(".who").addEventListener("click", e => {
+      if(e.metaKey || e.ctrlKey || e.shiftKey || el.classList.contains("abre")) return;
+      e.preventDefault(); el.classList.add("abre"); setTimeout(() => { location.href = href; }, reduced ? 300 : 1100);
+    });
   }
 
   // Mini "photo" of a project: its main image when it has one, otherwise its own site inside a laptop, still.

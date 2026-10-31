@@ -70,6 +70,28 @@
     vids.forEach(v => { const host = v.closest(".pn1"); if(!host || host.querySelector(".vpause")) return; const b = document.createElement("button"); b.type = "button"; b.className = "vpause"; b.setAttribute("aria-label", LP[0]); b.innerHTML = '<i></i><i></i>';
       b.addEventListener("click", () => { const stop = !v.paused; if(stop){ v.pause(); v.dataset.manual = "1"; } else { delete v.dataset.manual; v.play().catch(() => {}); } host.classList.toggle("paused", stop); b.setAttribute("aria-label", stop ? LP[1] : LP[0]); });
       host.appendChild(b); });
+    // ver en grande: botón de ampliar en cada vídeo y, en pantallas pequeñas o táctiles, también al pulsar el vídeo
+    const ZT = PORT.lang === "en" ? ["View larger", "Close"] : ["Ver en grande", "Cerrar"];
+    let dlg = null;
+    const abre = v => {
+      if(!dlg){
+        dlg = document.createElement("dialog"); dlg.className = "vdlg"; dlg.setAttribute("aria-label", ZT[0]);
+        dlg.innerHTML = `<button type="button" class="vclose">${ZT[1]} ✕</button><video controls playsinline loop></video>`;
+        document.body.appendChild(dlg);
+        dlg.querySelector(".vclose").addEventListener("click", () => dlg.close());
+        dlg.addEventListener("click", e => { if(e.target === dlg) dlg.close(); });
+        dlg.addEventListener("close", () => { const bv = dlg.querySelector("video"); bv.pause(); bv.removeAttribute("src"); bv.load(); const o = dlg._o; if(o && !o.dataset.manual) o.play().catch(() => {}); });
+      }
+      const bv = dlg.querySelector("video"); dlg._o = v; v.pause();
+      bv.setAttribute("aria-label", v.getAttribute("aria-label") || ""); bv.poster = v.poster || ""; bv.src = v.currentSrc || v.dataset.src; bv.currentTime = v.currentTime || 0;
+      dlg.showModal(); bv.play().catch(() => {});
+    };
+    const small = matchMedia("(max-width:700px), (hover:none)");
+    vids.forEach(v => { const host = v.closest(".pn1"); if(!host) return;
+      const z = document.createElement("button"); z.type = "button"; z.className = "vzoom"; z.setAttribute("aria-label", ZT[0]);
+      z.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="#0b0b0b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2h4v4M6 14H2v-4M14 2l-4.5 4.5M2 14l4.5-4.5"/></svg>';
+      z.addEventListener("click", e => { e.stopPropagation(); abre(v); }); host.appendChild(z);
+      host.addEventListener("click", e => { if(small.matches && !e.target.closest("button")) abre(v); }); });
     if(PORT.reduced){ vids.forEach(x => { x.src = x.dataset.src; x.preload = "metadata"; }); return; }
     const io2 = new IntersectionObserver(es => es.forEach(e => { const x = e.target; if(e.isIntersecting){ if(!x.src) x.src = x.dataset.src; if(!x.dataset.manual) x.play().catch(() => {}); } else x.pause(); }), { threshold: .2 });
     vids.forEach(x => io2.observe(x));
