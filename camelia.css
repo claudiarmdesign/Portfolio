@@ -139,8 +139,8 @@
   /* móvil: tras el último capítulo no se suman dos márgenes, así «Decisiones» no queda tan separado */
   @media (max-width:640px){ .chs > div > .chap:last-child{ margin-bottom:0; } }
 
-  /* cinta de crédito en paneles pequeños: letra más pequeña y el texto en dos líneas para que quepa entero */
-  @media (max-width:640px){ .cr .credit{ width:34px; gap:4px; font-size:.5rem; letter-spacing:.02em; white-space:normal; text-align:center; line-height:1.15; } .cr .credit b{ max-height:100%; } .cr .fill{ right:34px; width:calc(100% - 34px); } }
+  /* cinta de crédito en paneles pequeños: la letra se escala con el panel para que el texto quepa entero en una línea */
+  @media (max-width:640px){ .cr{ container-type:inline-size; } .cr .credit{ width:26px; flex-direction:column; align-items:center; justify-content:center; gap:3px; font-size:calc((125cqw - 18px) / 28); letter-spacing:0; white-space:nowrap; line-height:1; } .cr .fill{ right:26px; width:calc(100% - 26px); } }
 
   /* ver los vídeos en grande (móvil): botón de ampliar y ventana a pantalla completa */
   .vzoom{ position:absolute; z-index:4; left:12px; bottom:12px; width:36px; height:36px; border:0; border-radius:99px; background:rgba(255,255,255,.88); display:none; align-items:center; justify-content:center; cursor:pointer; transition:transform .16s cubic-bezier(.23,1,.32,1); } .vzoom:active{ transform:scale(.94); } .vzoom svg{ width:16px; height:16px; }
