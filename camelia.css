@@ -31,27 +31,28 @@
     .fase{ grid-template-columns:2rem 1fr; } .fase p{ grid-column:2; }
     .pair.stack{ grid-template-columns:1fr; gap:16px; } .sh{ left:10%; right:10%; }
       .film{ gap:2%; } .cap{ font-size:.625rem; top:10px; left:12px; } .cap.r{ right:12px; }
+      .fp .cap{ padding:2px 7px; max-width:calc(100% - 24px); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   }
-  @media (max-width:380px){ .pair{ grid-template-columns:1fr; } }
   .protob{ margin:0; padding-top:4px; }
-  .pair.prow{ margin-top:8px; align-items:start; } @media (max-width:640px){ .pair.prow{ grid-template-columns:1fr; margin-top:16px; } .pair.prow > span{ display:none; } }
+  .pair.prow{ margin-top:8px; align-items:start; }
   .chap .ct p + p{ margin-top:12px; }
   /* un solo punto de partida para el texto: las secciones (Reto, Solución, Decisiones, Resultado) usan las mismas columnas que los capítulos */
   @media (min-width:901px){ .f2 .sec{ grid-template-columns:minmax(150px,2fr) minmax(0,10fr); } }
   .chs .tx{ font-size:.9375rem; max-width:50ch; }
   /* paneles verticales: huecos, logo antiguo, maquetas y vídeo */
   .pn1.slot{ background:transparent; border:1px dashed #cfcfd4; } .slot .in{ position:absolute; inset:0; display:grid; place-content:center; justify-items:center; gap:4px; padding:12%; text-align:center; font-size:.8125rem; color:var(--g3); } .slot .in b{ font-weight:500; color:var(--ink); }
-  @media (max-width:640px){ .pair{ grid-template-columns:1fr; gap:16px; } }
   .hero.slot{ background:transparent; border:1px dashed #cfcfd4; } .hero.slot.cover{ aspect-ratio:16/10; } @media (max-width:640px){ .hero.slot.cover{ aspect-ratio:4/5; } }
   /* capítulo con una sola imagen: texto a la izquierda e imagen a su derecha (misma columna que el segundo panel de las parejas) */
   .chap.side{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:8px; align-items:start; } .chap.side .ct{ margin-bottom:0; } .chap.side .ed{ margin-top:0; }
-  @media (max-width:900px){ .chap.side{ grid-template-columns:1fr; } .chap.side .ed{ margin-top:clamp(20px,4vh,40px); } }
+  @media (max-width:640px){ .chap.side{ grid-template-columns:1fr; } .chap.side .ed{ margin-top:clamp(20px,4vh,40px); width:calc(50% - 4px); } }
+  /* paneles interactivos (asistente, navegador, teclas): a ancho completo en pantallas pequeñas para que se vean y se puedan usar */
+  @media (max-width:700px){ .pair.wm{ grid-template-columns:1fr; gap:16px; } }
   /* crédito de la identidad de marca: cinta vertical blanca pegada al borde derecho de la imagen, siempre visible */
   .cr .credit{ position:absolute; inset:0 0 0 auto; z-index:2; width:26px; padding:0; background:#fff; color:#5c5c61; writing-mode:vertical-rl; transform:rotate(180deg); display:flex; flex-direction:row; align-items:center; justify-content:center; gap:10px; font-size:.625rem; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; }
   .cr .credit b, .cr .credit i{ font-size:inherit; font-weight:400; font-style:normal; }
   /* portada de la hoja: imagen horizontal / dos verticales / datos en columna + foto vertical */
   .hc img{ display:block; width:100%; height:auto; }
-  .pair.tri{ grid-template-columns:repeat(3,minmax(0,1fr)); } @media (max-width:640px){ .pair.tri{ grid-template-columns:1fr; } }
+  .pair.tri{ grid-template-columns:repeat(3,minmax(0,1fr)); }
   .pair.hero3{ margin-top:clamp(24px,5vh,56px); }
   /* carpeta animada (Je'nim, plataformas analizadas): diseño base de 1080 px escalado al ancho del panel */
   .fold{ background:radial-gradient(circle at 50% 38%,#fff 0%,#f4f5f9 62%,#ecedf4 100%); }
@@ -85,13 +86,10 @@
   /* portada con dos imágenes verticales 2:3 en fila a la derecha (bajo la fila de datos), cerca pero sin tocarse */
   .pair.hero3.two{ grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1.35fr)); } .pn1 .fill.contain{ object-fit:contain; } .pn1 .fill.mul{ mix-blend-mode:multiply; }
   /* tres imágenes seguidas en el mismo bloque: izquierda, centro y derecha, a 8 px una de otra */
-  .pair.hero3.one{ grid-template-columns:minmax(0,1.4fr) minmax(0,2fr); } @media (max-width:640px){ .pair.hero3.one{ grid-template-columns:1fr; } .pair.hero3.one .sp{ display:none; } }
+  .pair.hero3.one{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
   .pair.hero3.three{ grid-template-columns:repeat(3,minmax(0,1fr)); }
-  @media (max-width:640px){ .pair.hero3.three{ grid-template-columns:1fr; } }
   @media (max-width:900px){ .pair.hero3.two{ grid-template-columns:minmax(0,.4fr) repeat(2,minmax(0,1fr)); } }
-  @media (max-width:640px){ .pair.hero3.two{ grid-template-columns:1fr; } .pair.hero3.two .sp{ display:none; } }
   .hinfo{ align-self:stretch; display:flex; align-items:flex-end; } .mc{ margin:0; display:grid; gap:18px; width:100%; font-size:.9375rem; line-height:1.35; padding-right:clamp(8px,2vw,32px); } .mc dt{ color:var(--g3); font-size:.8125rem; } .mc dd{ margin:2px 0 0; } .mc > div:first-child dd{ font-weight:500; } .mc a{ border-bottom:1px solid var(--g2); }
-  @media (max-width:640px){ .hinfo{ order:2; } }
   .hinfo.top{ align-items:flex-start; }
   /* opción 5: los datos empiezan a la altura del inicio de la foto y, al hacer scroll, bajan con la página hasta chocar con el final de la foto */
   .hinfo.top{ display:block; align-self:stretch; } .hinfo.top .mc{ position:sticky; top:calc(var(--bar, 64px) + 16px); }
@@ -124,6 +122,13 @@
   .saf .spb:active{ background:#f6f6f8; } .saf .spb:focus-visible, .saf .spc:focus-visible{ outline:2px solid #0044E1; outline-offset:-3px; border-radius:4px; }
   @media (max-width:640px){ .pn1.saf{ aspect-ratio:4/6; } .saf .sw{ left:2.5cqw; right:2.5cqw; bottom:2.5cqw; top:max(30px,9cqw); } .saf .spc{ min-height:32px; } }
   @media (prefers-reduced-motion:reduce){ .saf .sv img, .saf .spb::before, .saf .spb, .saf .spc{ transition:none; } }
-  @media (max-width:640px){ .pair > span:empty{ display:none; } }
   .pn1 .cbtn{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:4; white-space:nowrap; background:rgba(255,255,255,.94); box-shadow:0 8px 24px -10px rgba(0,0,0,.25); }
   .pn1.hero3w{ margin-top:clamp(24px,5vh,56px); }
+
+  /* portada con datos en columna: por debajo de 680 px (cuando el texto ya no cabe) pasa a fila de datos arriba y foto más grande abajo a la derecha */
+  .cv-narrow{ display:none; } @media (max-width:680px){ .cv-wide{ display:none; } .cv-narrow{ display:block; } .cv-narrow .pair.hero3{ grid-template-columns:minmax(0,.5fr) minmax(0,1fr); } }
+
+  /* Tuchati, capítulo 5, en pantallas pequeñas: paleta sola, debajo Ask Tuchati y alta fidelidad del mismo tamaño y al final el chat interactivo a ancho completo */
+  @media (max-width:700px){ .ed.reflow{ grid-template-columns:repeat(2,minmax(0,1fr)); } .ed.reflow > .pair{ display:contents; } .ed.reflow [data-k="paleta"]{ grid-area:1 / 1; } .ed.reflow [data-k="asistente"]{ grid-area:2 / 1; } .ed.reflow [data-k="hifi"]{ grid-area:2 / 2; } .ed.reflow [data-k="chat"]{ grid-area:3 / 1 / 4 / 3; } }
+  /* Brvma: la primera imagen (vídeo de la portada) más grande en móvil */
+  @media (max-width:640px){ .pair.hero3.one{ grid-template-columns:minmax(0,3fr) minmax(0,1fr); } }

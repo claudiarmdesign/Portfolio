@@ -72,10 +72,12 @@
     if(!ddOn){ ddOn = true; addEventListener("click", cierra); addEventListener("keydown", e => { if(e.key === "Escape") cierra(); }); }
   }
 
-  // Loader: a thin counter and, next to it, a mini photo of each project in turn with its name underneath.
+  // Loader: a greeting that cycles through languages (ends on «Hola») and, next to it, a mini photo of each project in turn with its name underneath.
   // el cargador sale al entrar en el portfolio (primera página de la pestaña) o al recargar; no al volver atrás ni al moverse por dentro
   let visto = false; try{ visto = sessionStorage.getItem("port-dentro") === "1"; sessionStorage.setItem("port-dentro", "1"); }catch(e){}
   const recarga = (performance.getEntriesByType("navigation")[0] || {}).type === "reload";
+  // «hola» en tantos idiomas como caben en la carga; empieza y acaba en castellano
+  const HOLA = [["Hola", "es"], ["Hello", "en"], ["Bonjour", "fr"], ["Ciao", "it"], ["Hallo", "de"], ["Olá", "pt"], ["你好", "zh"], ["こんにちは", "ja"], ["Kaixo", "eu"], ["Привет", "ru"], ["مرحبا", "ar", "rtl"], ["Bon dia", "ca"], ["नमस्ते", "hi"], ["Γεια σου", "el"], ["안녕하세요", "ko"], ["Merhaba", "tr"], ["Hej", "sv"], ["Ola", "gl"], ["שלום", "he", "rtl"], ["Aloha", "haw"], ["Moi", "fi"], ["Cześć", "pl"], ["Jambo", "sw"], ["สวัสดี", "th"], ["Szia", "hu"], ["Xin chào", "vi"], ["Salut", "ro"], ["Hola", "es"]];
   function carga(done, ms = 3600){
     const quiet = reduced || /[?&]carga=0/.test(location.search) || (visto && !recarga);
     if(quiet){ document.body.classList.remove("cargando"); done && done(); return; }
@@ -83,16 +85,17 @@
     const el = document.createElement("div");
     el.className = "carga"; el.setAttribute("role", "status"); el.setAttribute("aria-label", t("carga"));
     el.innerHTML = `<div class="ctop" aria-hidden="true"><span>${esc(marca)}</span><span>Portfolio '26</span></div>
-      <div class="c1" aria-hidden="true"><div class="cn"><span id="cn">0</span><sup>%</sup></div><div class="cfoto">${ps.map((p, i) => `<div class="cf" data-i="${i}">${mini(p)}</div>`).join("")}</div></div>
+      <div class="c1" aria-hidden="true"><div class="cn"><span id="cn" lang="es">Hola</span></div><div class="cfoto">${ps.map((p, i) => `<div class="cf" data-i="${i}">${mini(p)}</div>`).join("")}</div></div>
       <div class="cpie" aria-hidden="true"><b id="cp"></b></div>`;
     document.body.classList.add("cargando"); document.body.prepend(el);
     const n = el.querySelector("#cn"), pie = el.querySelector("#cp"), items = [...el.querySelectorAll(".cf")];
     const t0 = performance.now(); let over = false, cur = -1;
     const out = () => { if(over) return; over = true; el.classList.add("fuera"); document.body.classList.remove("cargando"); setTimeout(() => { el.remove(); done && done(); }, 1050); };
-    const ease = t => 1 - Math.pow(1 - t, 2.2);
+    let g = -1;
     (function tick(now){
       const t = Math.max(0, Math.min((now - t0) / ms, 1));
-      n.textContent = Math.round(ease(t) * 100);
+      const gi = Math.min(HOLA.length - 1, Math.floor(t * HOLA.length));
+      if(gi !== g){ g = gi; n.textContent = HOLA[gi][0]; n.lang = HOLA[gi][1]; n.dir = HOLA[gi][2] || "ltr"; }
       const k = Math.min(N - 1, Math.floor(t * N));
       if(k !== cur){ cur = k; items.forEach((f, i) => f.classList.toggle("on", i === k)); pie.textContent = ps[k].nombre + "  " + String(k + 1).padStart(2, "0") + " / " + String(N).padStart(2, "0"); }
       if(t < 1) requestAnimationFrame(tick); else setTimeout(out, 420);

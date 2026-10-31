@@ -7,8 +7,8 @@
 <title>Proyecto — Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="asistente.css?v=1792781446">
-<link rel="stylesheet" href="camelia.css?v=1793213639">
-<link rel="stylesheet" href="base.css?v=1793042960">
+<link rel="stylesheet" href="camelia.css?v=1793449196">
+<link rel="stylesheet" href="base.css?v=1793446511">
 <style>
   /* HOJA DE PROYECTO — narrativa. Tipografía callada: etiquetas grises pequeñas y texto en peso normal. */
   .shot{ background:var(--g1); border-radius:6px; overflow:hidden; display:flex; justify-content:center; align-items:flex-end; gap:clamp(14px,3vw,44px); padding:clamp(28px,6vw,84px) clamp(18px,5vw,72px) 0; }
@@ -72,11 +72,11 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   <nav class="nav"><a class="pill" id="todos" href="index.html"></a><div id="lang"></div></nav>
 </header>
 <main id="main"></main>
-<script src="datos.js?v=1793216516"></script>
+<script src="datos.js?v=1793446367"></script>
 <script src="asistente.js?v=1792781446"></script>
-<script src="capitulos.js?v=1793215465"></script>
-<script src="camelia.js?v=1793042960"></script>
-<script src="comun.js?v=1793126133"></script>
+<script src="capitulos.js?v=1793449196"></script>
+<script src="camelia.js?v=1793449196"></script>
+<script src="comun.js?v=1793446367"></script>
 <script>
 (function(){
   const D = DATOS, E = PORT.esc, M = PORT, $ = s => document.querySelector(s);
@@ -100,10 +100,10 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   const dec = () => `<ul class="lst">${p.decisiones.map(d => `<li>${E(d)}</li>`).join("")}</ul>`;
 
   const metaCol = `<dl class="mc"><div><dt>${t("proyecto")}</dt><dd>${E(p.nombre)}</dd></div><div><dt>${t("rol")}</dt><dd>${E(p.rol || "—")}</dd></div><div><dt>${t("estado")}</dt><dd>${t("completado")}</dd></div><div><dt>${t("fecha")}</dt><dd>${p.anio}</dd></div><div><dt>${t("herramientas")}</dt><dd>${p.herramientas ? p.herramientas.join(" · ") : "—"}</dd></div><div><dt>${t("enlace")}</dt><dd>${enlaces}</dd></div></dl>`;
-  if(p.capitulos && window.CAP && window.CAMELIA){ $("#main").innerHTML = meta + CAP.render(p, { t, E, pn }); PORT.menus(); document.querySelectorAll(".asp").forEach(h => window.ASIST && ASIST.mount(h, { lang: PORT.lang })); CAP.init(); CAMELIA.init(); return; }
+  if(p.capitulos && window.CAP && window.CAMELIA){ $("#main").innerHTML = (CAP.metaCover(p) ? "" : meta) + CAP.render(p, { t, E, pn, metaCol, meta }); PORT.menus(); document.querySelectorAll(".asp").forEach(h => window.ASIST && ASIST.mount(h, { lang: PORT.lang })); CAP.init(); CAMELIA.init(); return; }
   if(p.slug === "camelia" && window.CAMELIA){
     // portada de la hoja: datos del proyecto en columna a la izquierda (bajan con el scroll hasta el final de la foto) y foto vertical a la derecha
-    $("#main").innerHTML = CAMELIA.render(p, { t, E, pn, metaCol }); PORT.menus(); CAMELIA.init(); return; }
+    $("#main").innerHTML = CAMELIA.render(p, { t, E, pn, metaCol, meta }); PORT.menus(); CAMELIA.init(); return; }
   let h = meta + `<div class="f2"><p class="intro">${E(p.frase)}</p>${hero()}`;
   if(p.listo) h += `
     <section class="sec"><h2>${t("reto")}</h2><div class="c"><p class="tx">${E(p.reto)}</p></div></section>

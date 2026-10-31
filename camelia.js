@@ -34,12 +34,13 @@
     const slot = k => `<div class="pn1 slot ar-4-5">${cap(L.pend)}<div class="in"><b>${E(L.sl[k][0])}</b><span>${E(L.sl[k][1])}</span></div></div>`;
     const pr = (a, b) => `<div class="pair">${a}${b}</div>`;
     const wfvid = `<div class="pn1 fp ar-4-5">${cap(L.wires)}<video class="fill" muted loop playsinline preload="none" poster="${A}wf-movil-poster.webp" data-src="${A}wf-movil-v.mp4" aria-label="${E(L.wiresAlt)}"></video></div>`;
-    const recvid = `<div class="pn1 fp ar-4-5">${cap(L.rec)}<video class="fill" muted loop playsinline preload="none" poster="${A}recorrido-poster.webp" data-src="${A}recorrido-v.mp4" aria-label="${E(L.recAlt)}"></video></div>`;
     const hfvid = `<div class="pn1 fp ar-4-5">${cap(L.hifi)}<video class="fill" muted loop playsinline preload="none" poster="${A}hf-laptop-poster.webp" data-src="${A}hf-laptop-v.mp4" aria-label="${E(L.hifiAlt)}"></video></div>`;
     const fill = (img, a, alt, words = "", ar = "ar-4-5", credit = false) => `<div class="pn1 fp ${ar}${credit ? " cr" : ""}">${cap(a)}<img class="fill" src="${A}${img}" alt="${E(alt)}" loading="lazy">${credit ? `<span class="credit"><b>${E(L.cred)}</b><i>${E(L.credIg)}</i></span>` : ""}</div>`;
 
     const chapter = (n, k, extra, cls = "") => `<section class="chap ${cls}" id="c${n}"><div class="ct"><small>${String(n).padStart(2, "0")} · ${E(F[k][0])}</small>${E(F[k][1]).split("\n\n").map(q => `<p>${q}</p>`).join("")}</div>${extra}</section>`;
-    const hero = `<div class="pair hero3"><div class="hinfo top">${o.metaCol}</div><div class="pn1 ar-4-5"><img class="fill" src="${A}hoja-portada-v.webp" alt="${E(L.heroAlt)}"></div></div>`;
+    const heroImg = `<div class="pn1 ar-4-5"><img class="fill" src="${A}hoja-portada-v.webp" alt="${E(L.heroAlt)}"></div>`;
+    // escritorio: datos en columna y foto a la derecha; por debajo de 900 px, fila de datos arriba y la foto abajo a la derecha (como el resto de proyectos)
+    const hero = `<div class="cv-wide"><div class="pair hero3"><div class="hinfo top">${o.metaCol}</div>${heroImg}</div></div><div class="cv-narrow">${o.meta}<div class="pair hero3"><span class="sp" aria-hidden="true"></span>${heroImg}</div></div>`;
     const dec = `<ul class="lst">${p.decisiones.map(x => `<li>${E(x)}</li>`).join("")}</ul>`;
 
     return `<div class="f2">
@@ -54,7 +55,7 @@
         ${chapter(3, 2, "")}
         ${chapter(4, 3, `<div class="ed"><div class="pair">${fill("priorizar-menu.webp", L.arqL, L.arqAlt)}</div></div>`)}
         ${chapter(5, 4, `<div class="ed"><div class="pair">${fill("paleta.webp", L.paleta, L.paletaAlt)}</div>${pr(wfvid, hfvid)}${proto}</div>`)}
-        ${chapter(6, 5, `<div class="ed">${recvid}</div>`, "side")}</div></div>
+        ${chapter(6, 5, "")}</div></div>
       <section class="sec"><h2>${t("decisiones")}</h2><div class="c">${dec}</div></section>
       <section class="sec"><h2>${t("resultado")}</h2><div class="c">${[p.resultado, p.resultadoFin, p.aprendi].map(x => `<p class="tx">${E(x)}</p>`).join("")}</div></section>
       <div class="fin">${pn}</div></div>`;
