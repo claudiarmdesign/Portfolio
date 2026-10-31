@@ -52,18 +52,14 @@
   function quien(el, href = "index.html"){
     el.className = "who-w";
     el.innerHTML = `<a class="who" href="${href}">${esc(marca)}</a><span class="who-foto" aria-hidden="true"><img src="${D.yo.foto}" alt=""></span>`;
-    // en pantallas táctiles no hay «hover»: la foto sale mientras el dedo está (o pasa) por encima del nombre y se esconde al soltar;
-    // si se pulsa, se queda y, un instante después, se hace lo de siempre (volver al inicio / recargar)
+    // en pantallas táctiles no hay «hover»: la foto sale mientras el dedo pasa por encima del nombre y se esconde al soltar.
+    // Un simple toque no la enseña: lleva directo a la página de inicio, como el enlace de siempre
     if(matchMedia("(hover:none)").matches){
       const encima = t => { const r = el.getBoundingClientRect(), m = 14; return t.clientX >= r.left - m && t.clientX <= r.right + m && t.clientY >= r.top - m && t.clientY <= r.bottom + m; };
-      const mueve = e => { if(el.dataset.fijo) return; const t = e.touches[0]; if(t) el.classList.toggle("abre", encima(t)); };
-      addEventListener("touchstart", mueve, { passive: true }); addEventListener("touchmove", mueve, { passive: true });
-      const suelta = () => { if(!el.dataset.fijo) setTimeout(() => { if(!el.dataset.fijo) el.classList.remove("abre"); }, 450); };
+      const mueve = e => { const t = e.touches[0]; if(t) el.classList.toggle("abre", encima(t)); };
+      addEventListener("touchmove", mueve, { passive: true });
+      const suelta = () => setTimeout(() => el.classList.remove("abre"), 450);
       addEventListener("touchend", suelta, { passive: true }); addEventListener("touchcancel", suelta, { passive: true });
-      el.querySelector(".who").addEventListener("click", e => {
-        if(e.metaKey || e.ctrlKey || e.shiftKey || el.dataset.fijo) return;
-        e.preventDefault(); el.dataset.fijo = "1"; el.classList.add("abre"); setTimeout(() => { location.href = href; }, reduced ? 300 : 1100);
-      });
     }
   }
 
@@ -117,6 +113,9 @@
     el.addEventListener("click", out);
   }
 
+  // Frase de resumen que abre la hoja, justo antes de «Reto» (misma estructura que el resto de secciones)
+  const resumen = p => p.resumen ? `<section class="sec resumen"><h2>${lang === "en" ? "In one sentence" : "En una frase"}</h2><div class="c"><p class="tx2">${esc(p.resumen)}</p></div></section>` : "";
+
   // Cierre de cada hoja: «¿Hablamos?» en grande con el correo y las redes; se coloca justo antes de los botones Anterior / Siguiente
   function contacto(){
     const fin = document.querySelector(".fin"); if(!fin || document.querySelector(".contacto")) return;
@@ -126,5 +125,5 @@
     fin.before(s);
   }
 
-  window.PORT = { laptop, phone, mini, reloj, carga, quien, idioma, menus, contacto, t, lang, esc, q, reduced, marca };
+  window.PORT = { laptop, phone, mini, reloj, carga, quien, idioma, menus, contacto, resumen, t, lang, esc, q, reduced, marca };
 })();

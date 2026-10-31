@@ -33,8 +33,8 @@
     const sx = PORT.lang === "en" ? "-en" : "";
     const slot = k => `<div class="pn1 slot ar-4-5">${cap(L.pend)}<div class="in"><b>${E(L.sl[k][0])}</b><span>${E(L.sl[k][1])}</span></div></div>`;
     const pr = (a, b) => `<div class="pair">${a}${b}</div>`;
-    const wfvid = `<div class="pn1 fp ar-4-5">${cap(L.wires)}<video class="fill" muted loop playsinline preload="none" poster="${A}wf-movil-poster.webp" data-src="${A}wf-movil-v.mp4" aria-label="${E(L.wiresAlt)}"></video></div>`;
-    const hfvid = `<div class="pn1 fp ar-4-5">${cap(L.hifi)}<video class="fill" muted loop playsinline preload="none" poster="${A}hf-laptop-poster.webp" data-src="${A}hf-laptop-v.mp4" aria-label="${E(L.hifiAlt)}"></video></div>`;
+    const wfvid = `<div class="pn1 fp ar-4-5">${cap(L.wires)}<video class="fill" muted loop playsinline preload="none" poster="${A}wf-movil-poster.webp" data-src="${A}wf-movil-v.mp4?v=2" aria-label="${E(L.wiresAlt)}"></video></div>`;
+    const hfvid = `<div class="pn1 fp ar-4-5">${cap(L.hifi)}<video class="fill" muted loop playsinline preload="none" poster="${A}hf-laptop-poster.webp" data-src="${A}hf-laptop-v.mp4?v=2" aria-label="${E(L.hifiAlt)}"></video></div>`;
     const fill = (img, a, alt, words = "", ar = "ar-4-5", credit = false) => `<div class="pn1 fp ${ar}${credit ? " cr" : ""}">${cap(a)}<img class="fill" src="${A}${img}" alt="${E(alt)}" loading="lazy">${credit ? `<span class="credit"><b>${E(L.cred)}</b><i>${E(L.credIg)}</i></span>` : ""}</div>`;
 
     const chapter = (n, k, extra, cls = "") => `<section class="chap ${cls}" id="c${n}"><div class="ct"><small>${String(n).padStart(2, "0")} · ${E(F[k][0])}</small>${E(F[k][1]).split("\n\n").map(q => `<p>${q}</p>`).join("")}</div>${extra}</section>`;
@@ -45,6 +45,7 @@
 
     return `<div class="f2">
       ${hero}
+      ${PORT.resumen(p)}
       <section class="sec"><h2>${t("reto")}</h2><div class="c">${paras(p.reto)}</div></section>
       <section class="sec"><h2>${t("solucion")}</h2><div class="c"><p class="tx">${E(p.solucion)}</p><div class="ed">${pr(fill("logo.webp", L.logo, L.logoAlt, "", "ar-4-5", true), fill("redes.webp", L.redes, L.redesAlt, "", "ar-4-5", true))}</div></div></section>
       <section class="sec"><h2>${t("proceso")}</h2><div class="c"><p class="tx">${E(p.procesoIntro)}</p></div></section>

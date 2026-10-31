@@ -361,6 +361,16 @@ window.DATOS.en = {
     aprendi: "The main challenge was coordinating the team’s work and prioritising tasks to turn an initial idea into a working experience in just five days. The Design Sprint made it possible to explore different solutions, make decisions and build a proposal collaboratively.",
     decisiones: ["Short exercises. Guided activities of one to three minutes to make the most of breaks between sessions.", "A plant as the symbol of progress. Its growth represents the process of self-care and personal evolution.", "No sensitive data. A simple experience that does not require sharing sensitive personal information.", "A calm visual identity. Purples, greens and neutral tones to convey calm and closeness.", "A space for support. An anonymous forum to share experiences with people in similar situations was proposed as a future evolution."],
   });
+
+  // frase de resumen que abre cada hoja (sale de sus propios textos de Resultado)
+  const RES = {
+    camelia: ["Una web que traslada la identidad de Camelia al entorno digital y convierte su presencia online en una experiencia de marca.", "A website that brings Camelia’s identity into the digital world and turns its online presence into a brand experience."],
+    tuchati: ["Un servicio que reúne información, orientación con IA y asistencia humana para ayudar a las personas extranjeras con sus trámites en España.", "A service that brings together information, AI guidance and human assistance to help foreign people with their procedures in Spain."],
+    jenim: ["De proyecto de clase a mercadillo digital real: una web que abre un domingo al mes, con piezas y vendedores seleccionados.", "From class project to real digital flea market: a website that opens one Sunday a month, with selected pieces and sellers."],
+    brvma: ["Una app que convierte la elección de un plan deportivo en una experiencia sorpresa, desde la reserva hasta el descubrimiento.", "An app that turns choosing a sports plan into a surprise experience, from booking to discovery."],
+    "del-reves": ["Una app de autocuidado con ejercicios breves y una planta que representa el progreso, diseñada en un Design Sprint de cinco días.", "A self-care app with short exercises and a plant that represents progress, designed in a five-day Design Sprint."],
+  };
+  Object.keys(RES).forEach(k => { P(k).resumen = RES[k][0]; D.en.p[k].resumen = RES[k][1]; });
 })();
 
 window.DATOS.bySlug = Object.fromEntries(window.DATOS.proyectos.map(p => [p.slug, p]));
