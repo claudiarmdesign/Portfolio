@@ -11,7 +11,7 @@
 <meta property="og:title" content="Claudia Ramírez — Portfolio"><meta property="og:description" content="Diseño UX/UI y desarrollo web desde Valencia.">
 <meta property="og:url" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/"><meta property="og:image" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/og/home.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Claudia Ramírez — Portfolio"><meta name="twitter:description" content="Diseño UX/UI y desarrollo web desde Valencia."><meta name="twitter:image" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/og/home.jpg">
-<link rel="stylesheet" href="base.css?v=1793647837">
+<link rel="stylesheet" href="base.css?v=1793648268">
 <style>
   /* GALERÍA — una sola pantalla: los proyectos son una baraja que se recorre con la rueda, las flechas o el dedo. */
   html,body{ height:100%; overflow:hidden; }
@@ -19,8 +19,9 @@
   .izq{ display:flex; align-items:center; gap:18px; }
   .reloj{ font-size:.8125rem; color:var(--g3); font-variant-numeric:tabular-nums; }
   .indice{ position:fixed; left:var(--pad); bottom:var(--pad); z-index:20; list-style:none; padding:0; display:flex; flex-direction:column; gap:1px; font-size:.8125rem; }
-  .indice button{ text-align:left; color:#c4c4c4; padding:3px 0; transition:color .3s ease; }
-  .indice button:hover{ color:var(--g3); }
+  .indice button{ text-align:left; color:var(--g3); padding:3px 0; transition:color .3s ease; }
+  .indice button:hover{ color:var(--ink); }
+  @media (pointer:coarse), (max-width:1024px){ .indice button{ position:relative; min-height:44px; display:flex; align-items:center; } .indice button::after{ content:""; position:absolute; inset:0 -4px; } }
   .indice button[aria-current="true"]{ color:var(--ink); }
   .meta-d{ position:fixed; right:var(--pad); top:50%; z-index:20; transform:translateY(-50%); font-size:.8125rem; text-align:right; max-width:22ch; line-height:1.35; }
   .meta-d b{ display:block; font-weight:500; }

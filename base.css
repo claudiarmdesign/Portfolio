@@ -115,3 +115,10 @@ body:not(.cargando) .entra{ opacity:1; transform:none; }
 .contacto .big i{ font-style:normal; font-weight:200; transition:transform .35s var(--ease); } .contacto .big:hover i, .contacto .big:focus-visible i{ transform:translateX(.12em); }
 .contacto .lk{ display:flex; flex-wrap:wrap; gap:6px 24px; margin-top:clamp(18px,3vw,32px); font-size:.9375rem; } .contacto .lk a{ position:relative; border-bottom:1px solid var(--ink); } .contacto .lk a::after{ content:""; position:absolute; inset:-12px -6px; } .contacto .lk a:hover{ border-bottom-color:transparent; }
 @media (prefers-reduced-motion:reduce){ .contacto .big i{ transition:none; } }
+
+/* Zonas de toque de 44 px (guía de Apple) sin cambiar el tamaño visible: una capa invisible amplía el área pulsable */
+:where(.who, .pill, .opt, .spc, .mt dd a, .mc dd a, .ab .links a, .sv .cta){ position:relative; }
+.who::after, .pill::after, .opt::after, .spc::after, .mt dd a::after, .mc dd a::after, .ab .links a::after, .sv .cta::after, .vpause::after, .vzoom::after, .cbtn::after{ content:""; position:absolute; inset:-4px 0; }
+.who::after{ inset:-8px -4px; } .spc::after{ inset:-7px 0; } .pill.circ::after{ inset:-4px; } .cbtn::after{ inset:-7px 0; } .vpause::after, .vzoom::after{ inset:-4px; }
+.mt dd a::after, .mc dd a::after, .ab .links a::after, .sv .cta::after{ inset:-13px -4px; }
+@media (pointer:coarse), (max-width:1024px){ .dd .panel button{ min-height:46px; align-items:center; } }
