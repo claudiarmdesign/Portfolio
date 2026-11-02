@@ -11,7 +11,7 @@
 <meta property="og:title" content="Claudia Ramírez — Portfolio"><meta property="og:description" content="Diseño UX/UI y desarrollo web desde Valencia.">
 <meta property="og:url" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/"><meta property="og:image" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/og/home.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Claudia Ramírez — Portfolio"><meta name="twitter:description" content="Diseño UX/UI y desarrollo web desde Valencia."><meta name="twitter:image" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/og/home.jpg">
-<link rel="stylesheet" href="base.css?v=1793455893">
+<link rel="stylesheet" href="base.css?v=1793647837">
 <style>
   /* GALERÍA — una sola pantalla: los proyectos son una baraja que se recorre con la rueda, las flechas o el dedo. */
   html,body{ height:100%; overflow:hidden; }
@@ -154,6 +154,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
       <div class="panel" role="menu"><button role="menuitemradio" aria-checked="true" data-v="galeria">${t("galeria")}</button><button role="menuitemradio" aria-checked="false" data-v="lista">${t("lista")}</button></div></div>
     <div class="dd" id="dd-sobre"><button class="pill" aria-haspopup="true" aria-expanded="false">${t("sobre")}${chev}</button><div class="panel ab" id="ab"></div></div>
     <div class="dd" id="dd-serv"><button class="pill" aria-haspopup="true" aria-expanded="false">${t("s_serv")}${chev}</button><div class="panel sv" id="sv"></div></div><div id="lang"></div>`;
+  { const h1 = document.createElement("h1"); h1.className = "vh"; h1.textContent = "Claudia Ramírez — " + (D.yo.rol || "Portfolio"); $("#esc").prepend(h1); }
   PORT.idioma($("#lang")); $("#ayuda").innerHTML = `<kbd>↑</kbd><kbd>↓</kbd> ${t("ayuda")}`;
   PORT.quien($("#quien")); PORT.reloj($("#reloj"));
 
