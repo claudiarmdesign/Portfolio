@@ -33,8 +33,8 @@
     const sx = PORT.lang === "en" ? "-en" : "";
     const slot = k => `<div class="pn1 slot ar-4-5">${cap(L.pend)}<div class="in"><b>${E(L.sl[k][0])}</b><span>${E(L.sl[k][1])}</span></div></div>`;
     const pr = (a, b) => `<div class="pair">${a}${b}</div>`;
-    const wfvid = `<div class="pn1 fp ar-4-5">${cap(L.wires)}<video class="fill" muted loop playsinline preload="none" poster="${A}wf-movil-poster.webp" data-src="${A}wf-movil-v.mp4?v=2" aria-label="${E(L.wiresAlt)}"></video></div>`;
-    const hfvid = `<div class="pn1 fp ar-4-5">${cap(L.hifi)}<video class="fill" muted loop playsinline preload="none" poster="${A}hf-laptop-poster.webp" data-src="${A}hf-laptop-v.mp4?v=2" aria-label="${E(L.hifiAlt)}"></video></div>`;
+    const wfvid = `<div class="pn1 fp ar-4-5">${cap(L.wires)}<video class="fill" muted loop playsinline preload="none" data-poster="${A}wf-movil-poster.webp" data-src="${A}wf-movil-v.mp4?v=2" aria-label="${E(L.wiresAlt)}"></video></div>`;
+    const hfvid = `<div class="pn1 fp ar-4-5">${cap(L.hifi)}<video class="fill" muted loop playsinline preload="none" data-poster="${A}hf-laptop-poster.webp" data-src="${A}hf-laptop-v.mp4?v=2" aria-label="${E(L.hifiAlt)}"></video></div>`;
     const fill = (img, a, alt, words = "", ar = "ar-4-5", credit = false) => `<div class="pn1 fp ${ar}${credit ? " cr" : ""}">${cap(a)}<img class="fill" src="${A}${img}" alt="${E(alt)}" loading="lazy">${credit ? `<span class="credit"><b>${E(L.cred)}</b><i>${E(L.credIg)}</i></span>` : ""}</div>`;
 
     const chapter = (n, k, extra, cls = "") => `<section class="chap ${cls}" id="c${n}"><div class="ct"><small>${String(n).padStart(2, "0")} · ${E(F[k][0])}</small>${E(F[k][1]).split("\n\n").map(q => `<p>${q}</p>`).join("")}</div>${extra}</section>`;
@@ -84,7 +84,7 @@
         dlg.addEventListener("close", () => { const bv = dlg.querySelector("video"); bv.pause(); bv.removeAttribute("src"); bv.load(); const o = dlg._o; if(o && !o.dataset.manual) o.play().catch(() => {}); });
       }
       const bv = dlg.querySelector("video"); dlg._o = v; v.pause();
-      bv.setAttribute("aria-label", v.getAttribute("aria-label") || ""); bv.poster = v.poster || ""; bv.src = v.currentSrc || v.dataset.src; bv.currentTime = v.currentTime || 0;
+      bv.setAttribute("aria-label", v.getAttribute("aria-label") || ""); bv.poster = v.poster || v.dataset.poster || ""; bv.src = v.currentSrc || v.dataset.src; bv.currentTime = v.currentTime || 0;
       dlg.showModal(); bv.play().catch(() => {});
     };
     const small = matchMedia("(max-width:700px), (hover:none)");
@@ -93,7 +93,10 @@
       z.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="#0b0b0b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2h4v4M6 14H2v-4M14 2l-4.5 4.5M2 14l4.5-4.5"/></svg>';
       z.addEventListener("click", e => { e.stopPropagation(); abre(v); }); host.appendChild(z);
       host.addEventListener("click", e => { if(small.matches && !e.target.closest("button")) abre(v); }); });
-    if(PORT.reduced){ vids.forEach(x => { x.src = x.dataset.src; x.preload = "metadata"; }); return; }
+    if(PORT.reduced){ vids.forEach(x => { x.poster = x.dataset.poster || ""; x.src = x.dataset.src; x.preload = "metadata"; }); return; }
+    // los carteles de los vídeos se piden solo cuando se acercan a la pantalla, para no competir con la imagen principal
+    const pio = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ const x = e.target; if(x.dataset.poster && !x.poster) x.poster = x.dataset.poster; pio.unobserve(x); } }), { rootMargin: "800px 0px" });
+    vids.forEach(x => pio.observe(x));
     const io2 = new IntersectionObserver(es => es.forEach(e => { const x = e.target; if(e.isIntersecting){ if(!x.src) x.src = x.dataset.src; if(!x.dataset.manual) x.play().catch(() => {}); } else x.pause(); }), { threshold: .2 });
     vids.forEach(x => io2.observe(x));
   }
