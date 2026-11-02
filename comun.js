@@ -28,7 +28,7 @@
   // Round "ES" button with a small dropdown to switch language
   function idioma(el){
     el.className = "dd"; el.id = "dd-idioma";
-    el.innerHTML = `<button class="pill circ" aria-haspopup="true" aria-expanded="false" aria-label="${esc(t("idioma"))}">${lang.toUpperCase()}</button><div class="panel mini-p" role="menu"><button role="menuitemradio" aria-checked="${lang === "es"}" data-l="es">ES</button><button role="menuitemradio" aria-checked="${lang === "en"}" data-l="en">EN</button></div>`;
+    el.innerHTML = `<button class="pill circ" aria-haspopup="true" aria-expanded="false" aria-label="${esc(t("idioma"))}: ${lang.toUpperCase()}">${lang.toUpperCase()}</button><div class="panel mini-p" role="menu"><button role="menuitemradio" aria-checked="${lang === "es"}" data-l="es">ES</button><button role="menuitemradio" aria-checked="${lang === "en"}" data-l="en">EN</button></div>`;
     el.querySelectorAll("[data-l]").forEach(b => b.addEventListener("click", () => { if(b.dataset.l === lang) return; store.set(b.dataset.l); const u = new URL(location.href); u.searchParams.delete("lang"); location.href = u.toString(); }));
   }
 

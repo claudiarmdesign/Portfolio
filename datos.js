@@ -49,7 +49,7 @@ window.DATOS = {
       listo: true,
     },
     {
-      slug: "tuchati", cover: "img/tuchati/principal-h.webp", coverM: "img/tuchati/principal-v.webp", nombre: "Tuchati", corto: "Tuchati", tipo: "Proyecto personal", cat: "Asistente con IA y personas", anio: "2026",
+      slug: "tuchati", cover: "img/tuchati/principal-h.webp", coverM: "img/tuchati/principal-v.webp", nombre: "Tuchati", corto: "Tuchati", tipo: "Proyecto personal", cat: "Web de asistente con IA y personas", anio: "2026",
       frase: "Tu asistente para la vida en España",
       rol: "UX/UI, front-end y SEO técnico", herramientas: ["Next.js", "Vercel", "Supabase", "Claude", "Stripe", "Resend"],
       sitio: ["tuchati.es", "https://tuchati.es"], figma: null,
@@ -69,7 +69,7 @@ window.DATOS = {
       listo: true,
     },
     {
-      slug: "jenim", cover: "img/jenim/principal-h.webp", coverM: "img/jenim/principal-v.webp", nombre: "Je'nim", corto: "Je'nim", tipo: "Académico llevado a producción", cat: "Mercadillo online", anio: "2026",
+      slug: "jenim", cover: "img/jenim/principal-h.webp", coverM: "img/jenim/principal-v.webp", nombre: "Je'nim", corto: "Je'nim", tipo: "Académico llevado a producción", cat: "Web de mercadillo online", anio: "2026",
       frase: "El mercadillo digital que solo abre los domingos",
       rol: "UX Research, UI y front-end", herramientas: ["Figma", "Next.js", "Vercel", "Stripe"],
       sitio: ["jenim.es", "https://jenim.es"], figma: ["Ver diseño en Figma", "https://www.figma.com/design/4QVQwmpj0ukWY51VFLCaND/Claudia.Ram%C3%ADrez-Reto-2-UI?node-id=0-1&t=PtY9MkzniLkmTgyM-1"],
@@ -178,7 +178,7 @@ window.DATOS.en = {
       aprendi: "Camelia made it possible to bring art direction, user experience design and web development together to shape a digital presence that is consistent with the brand identity, functional and ready to evolve with the studio.",
     },
     tuchati: {
-      tipo: "Personal project", cat: "AI and human assistant", frase: "Your assistant for life in Spain", rol: "UX/UI, front-end and technical SEO",
+      tipo: "Personal project", cat: "AI and human assistant website", frase: "Your assistant for life in Spain", rol: "UX/UI, front-end and technical SEO",
       reto: "Living in Spain without knowing the system, the language or where to find reliable information turns simple tasks into confusing processes.",
       solucion: "An assistant that guides with AI and, when needed, hands over to a person who takes care of the paperwork.",
       resultado: "A simple entry point to ask, understand, decide and move forward, already live.",
@@ -192,7 +192,7 @@ window.DATOS.en = {
       aprendi: "AI doesn't replace trust.",
     },
     jenim: {
-      tipo: "Academic project taken to production", cat: "Online flea market", frase: "The digital flea market that only opens on Sundays", rol: "UX research, UI and front-end",
+      tipo: "Academic project taken to production", cat: "Online flea market website", frase: "The digital flea market that only opens on Sundays", rol: "UX research, UI and front-end",
       figma: ["View design in Figma", "https://www.figma.com/design/4QVQwmpj0ukWY51VFLCaND/Claudia.Ram%C3%ADrez-Reto-2-UI?node-id=0-1&t=PtY9MkzniLkmTgyM-1"],
       reto: "Second-hand has plenty of supply but little curation: users get lost, doubt the quality and the experience feels cold.",
       solucion: "A flea market that recreates the stroll: limited editions, reviewed pieces and sellers, and a website in three phases.",

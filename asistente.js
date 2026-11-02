@@ -17,7 +17,7 @@
   function markup(lang, full){
     const L = TX[lang] || TX.es;
     return `<div class="asi${full ? " full" : ""}" role="group" aria-label="${esc(L.aria)}"><header><span class="av"><img src="img/tuchati/asistente-icono.png" alt=""></span><div class="tt"><b>Tuchati Assistant</b><span>Here to help with your life in Spain</span></div><div class="wc" aria-hidden="true"><i>${IC.min}</i><i>${IC.x}</i></div></header>
-      <div class="body" aria-live="polite"><div class="welcome"><h4>Welcome to Tuchati</h4><p>How can I help you today?</p><button type="button" class="opt" data-o="move" aria-disabled="true">Moving to Spain</button><button type="button" class="opt" data-o="live">Already living in Spain</button><button type="button" class="opt link" data-o="else" aria-disabled="true">Something else</button></div></div>
+      <div class="body" aria-live="polite"><div class="welcome"><h3>Welcome to Tuchati</h3><p>How can I help you today?</p><button type="button" class="opt" data-o="move" aria-disabled="true">Moving to Spain</button><button type="button" class="opt" data-o="live">Already living in Spain</button><button type="button" class="opt link" data-o="else" aria-disabled="true">Something else</button></div></div>
       <form onsubmit="return false"><div class="in" aria-hidden="true"><span>Ask a question…</span></div><span class="send" aria-hidden="true">${IC.send}</span></form>
       <div class="note"><span class="ns">${esc(L.sim)}</span></div></div>`;
   }

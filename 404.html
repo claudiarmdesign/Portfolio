@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Página no encontrada — Claudia Ramírez</title>
+<link rel="stylesheet" href="/base.css">
+<style>
+  .nf{ min-height:100svh; padding:calc(var(--bar) + 24px) var(--pad) var(--pad); display:flex; flex-direction:column; justify-content:flex-end; gap:clamp(20px,3vw,36px); max-width:1320px; margin:0 auto; }
+  .nf .big{ font-size:clamp(5rem,26vw,22rem); font-weight:200; letter-spacing:-.06em; line-height:.85; margin-left:-.04em; }
+  .nf .txt{ border-top:1px solid var(--ink); padding-top:clamp(16px,2.4vw,28px); display:flex; flex-wrap:wrap; gap:16px 48px; justify-content:space-between; align-items:flex-start; }
+  .nf h1{ font-size:clamp(1.25rem,2.4vw,1.75rem); font-weight:400; letter-spacing:-.02em; max-width:22ch; line-height:1.15; }
+  .nf p{ color:var(--g3); font-size:.9375rem; max-width:44ch; margin-top:8px; }
+  .nf nav{ display:flex; flex-wrap:wrap; gap:4px 24px; font-size:.9375rem; }
+  .nf nav a{ position:relative; border-bottom:1px solid var(--ink); } .nf nav a:hover{ border-bottom-color:transparent; }
+  .nf nav a::after{ content:""; position:absolute; inset:-13px -6px; }
+  .nf .home{ display:inline-flex; margin-top:20px; }
+</style>
+</head>
+<body>
+<header class="bar"><a class="who" href="/">Claudia Ramírez</a></header>
+<main class="nf">
+  <div class="big" aria-hidden="true">404</div>
+  <div class="txt">
+    <div>
+      <h1 id="t">Esta página no existe</h1>
+      <p id="d">La dirección no es correcta o el proyecto se ha movido.</p>
+      <a class="pill home" id="h" href="/">Volver al portfolio →</a>
+    </div>
+    <nav id="n" aria-label="Proyectos">
+      <a href="/camelia">Camelia Interiorismo</a><a href="/tuchati">Tuchati</a><a href="/jenim">Je'nim</a><a href="/brvma">Brvma</a><a href="/del-reves">Del Revés</a>
+    </nav>
+  </div>
+</main>
+<script>
+  try{ if(localStorage.getItem("lang") === "en"){
+    document.documentElement.lang = "en"; document.title = "Page not found — Claudia Ramírez";
+    document.getElementById("t").textContent = "This page doesn't exist";
+    document.getElementById("d").textContent = "The address is wrong or the project has moved.";
+    document.getElementById("h").textContent = "Back to the portfolio →";
+    document.getElementById("n").setAttribute("aria-label", "Projects");
+  } }catch(_){}
+</script>
+</body>
+</html>
