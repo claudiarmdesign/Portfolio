@@ -11,7 +11,9 @@
 <meta property="og:title" content="Claudia Ramírez — Portfolio"><meta property="og:description" content="Diseño UX/UI y desarrollo web desde Valencia.">
 <meta property="og:url" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/"><meta property="og:image" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/og/home.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Claudia Ramírez — Portfolio"><meta name="twitter:description" content="Diseño UX/UI y desarrollo web desde Valencia."><meta name="twitter:image" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/og/home.jpg">
-<link rel="stylesheet" href="base.css?v=1793648268">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
+<link rel="stylesheet" href="base.css?v=1793649407">
 <style>
   /* GALERÍA — una sola pantalla: los proyectos son una baraja que se recorre con la rueda, las flechas o el dedo. */
   html,body{ height:100%; overflow:hidden; }
@@ -144,9 +146,10 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </main>
 
 <script src="datos.js?v=1793649061"></script>
-<script src="comun.js?v=1793649061"></script>
+<script src="comun.js?v=1793649407"></script>
 <script>
 (function(){
+  const IMGW = { camelia: [1800, 1000], tuchati: [2000, 1600], jenim: [2000, 1553], brvma: [2000, 1125], "del-reves": [2000, 1125] };   // anchos de las portadas originales (para srcset)
   const D = DATOS, E = PORT.esc, $ = s => document.querySelector(s), N = D.proyectos.length;
   const mq = "";
   const t = PORT.t, chev = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4z"/></svg>';
@@ -176,7 +179,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
   // --- deck
   $("#baraja").innerHTML = D.proyectos.map((p, i) => `<a class="carta" data-i="${i}" href="${p.slug}.html${mq}" aria-label="${E(p.nombre)}">${
-    p.cover ? `<picture>${p.coverM ? `<source media="(max-width:640px)" srcset="${p.coverM}">` : ""}<img class="cov" src="${p.cover}" alt="${t("imagen")} ${E(p.nombre)}"></picture>` : p.listo ? `<div class="mk" role="img" aria-label="Mockup de ${E(p.nombre)}"><div class="l">${PORT.laptop(p.laptop[0], "", i)}</div><div class="m">${PORT.phone(p.movil, "", i)}</div></div>`
+    p.cover ? `<picture>${p.coverM ? `<source media="(max-width:640px)" srcset="${p.coverM.replace("principal-v.webp", "principal-v-640.webp")} 640w, ${p.coverM} ${(IMGW[p.slug] || [0, 1000])[1]}w" sizes="min(74vw,340px)">` : ""}<img class="cov" src="${p.cover}" srcset="${p.cover.replace("principal-h.webp", "principal-h-960.webp")} 960w, ${p.cover} ${(IMGW[p.slug] || [1800])[0]}w" sizes="(max-width:1024px) min(80vw,720px), min(52vw,780px)" decoding="async"${i === 0 ? ' fetchpriority="high"' : ""} alt="${t("imagen")} ${E(p.nombre)}"></picture>` : p.listo ? `<div class="mk" role="img" aria-label="Mockup de ${E(p.nombre)}"><div class="l">${PORT.laptop(p.laptop[0], "", i)}</div><div class="m">${PORT.phone(p.movil, "", i)}</div></div>`
             : `<div class="tit">${E(p.nombre)}</div><div class="sf">${t("prep_corto")}</div>`}<span class="nom">${E(p.nombre)}<i aria-hidden="true">→</i></span></a>`).join("");
   $("#indice").innerHTML = D.proyectos.map((p, i) => `<li><button data-i="${i}">${E(p.nombre)}</button></li>`).join("");
   // vista lista: tabla con vista previa que sigue al cursor (como la tabla «Projects» de la referencia)

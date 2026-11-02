@@ -65,7 +65,7 @@
 
   // Mini "photo" of a project: its main image when it has one, otherwise its own site inside a laptop, still.
   const mini = p => p.cover
-    ? `<div class="mini"><img class="cov" src="${p.cover}" alt=""></div>`
+    ? `<div class="mini"><img class="cov" src="${p.cover.replace(/principal-h\.webp.*$/, "mini.webp")}" alt="" decoding="async"></div>`
     : p.listo
       ? `<div class="mini"><div class="mini-l">${laptop(p.laptop[0], "")}</div></div>`
       : `<div class="mini tile"><span>${esc(p.corto)}</span></div>`;

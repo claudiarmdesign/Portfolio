@@ -14,7 +14,9 @@
     a2: "Of course. I've prepared your request with what you've told me. An advisor will contact you within 24 working hours." };
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  function markup(lang, full){
+  // la tipografía del asistente (Manrope) solo se pide cuando la hoja la usa, sin bloquear el resto de páginas
+  function fuente(){ if(document.querySelector("link[data-manrope]")) return; const l = document.createElement("link"); l.rel = "stylesheet"; l.dataset.manrope = ""; l.href = "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"; document.head.appendChild(l); }
+  function markup(lang, full){ fuente();
     const L = TX[lang] || TX.es;
     return `<div class="asi${full ? " full" : ""}" role="group" aria-label="${esc(L.aria)}"><header><span class="av"><img src="img/tuchati/asistente-icono.png" alt=""></span><div class="tt"><b>Tuchati Assistant</b><span>Here to help with your life in Spain</span></div><div class="wc" aria-hidden="true"><i>${IC.min}</i><i>${IC.x}</i></div></header>
       <div class="body" aria-live="polite"><div class="welcome"><h3>Welcome to Tuchati</h3><p>How can I help you today?</p><button type="button" class="opt" data-o="move" aria-disabled="true">Moving to Spain</button><button type="button" class="opt" data-o="live">Already living in Spain</button><button type="button" class="opt link" data-o="else" aria-disabled="true">Something else</button></div></div>

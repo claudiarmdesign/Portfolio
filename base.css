@@ -1,6 +1,5 @@
 /* Rediseño · base compartida: blanco, negro y grises; el color lo ponen los proyectos.
    Una sola familia (Archivo): el carácter sale del contraste de ancho —extendida en grande, normal en pequeño—. */
-@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap");
 
 :root{
   --bg:#fff; --ink:#0b0b0b; --mock:#f6f5f7; --g1:#f4f4f4; --g2:#e6e6e6; --g3:#767676;

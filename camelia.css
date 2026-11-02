@@ -154,3 +154,9 @@
 
   /* botón «Ver prototipo en Figma» sobre la imagen: en paneles estrechos baja a dos líneas y queda dentro de la imagen */
   @media (max-width:480px){ .pn1 .cbtn{ white-space:normal; width:calc(100% - 16px); justify-content:center; text-align:center; padding:8px 10px; line-height:1.2; min-height:0; font-size:.75rem; } }
+
+/* Crédito de la imagen de identidad en pantallas muy estrechas: franja horizontal abajo, con letra legible (la tira vertical quedaba en ~6 px) */
+@media (max-width:380px){
+  .cr .credit{ inset:auto 0 0 0; width:auto; writing-mode:horizontal-tb; transform:none; flex-direction:row; flex-wrap:wrap; justify-content:center; align-items:center; gap:0 5px; padding:6px 6px 7px; font-size:.5625rem; line-height:1.25; letter-spacing:.03em; white-space:normal; text-align:center; }
+  .cr .fill{ right:0; width:100%; }
+}
