@@ -146,7 +146,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </main>
 
 <script src="datos.js?v=1793705782"></script>
-<script src="comun.js?v=1793695041"></script>
+<script src="comun.js?v=1793712345"></script>
 <script>
 (function(){
   const IMGW = { camelia: [1800, 1000], tuchati: [2000, 1600], jenim: [2000, 1553], brvma: [2000, 1125], "del-reves": [2000, 1125] };   // anchos de las portadas originales (para srcset)
@@ -170,7 +170,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
     exp: sec(t("s_exp"), y.experiencia.map(x => `<div class="rw"><span>${E(x[0])}</span><span><b>${E(x[1])}</b> · ${E(x[2])}${x[3] ? `<small>${E(x[3])}</small>` : ""}</span></div>`).join("")),
     form: sec(t("s_for"), y.formacion.map(x => `<div class="rw"><span>${E(x[0])}</span><span><b>${E(x[1])}</b> · ${E(x[2])}</span></div>`).join("")),
     idi: sec(t("s_idi"), y.idiomas.map(x => `<div class="rw"><span>${E(x[0])}</span><span>${E(x[1])}</span></div>`).join("")),
-    cont: sec(t("s_cont"), `<div class="links"><a href="mailto:${y.email}">${E(y.email)}</a><a href="${y.linkedin}" target="_blank" rel="noopener">LinkedIn ↗</a><a href="${y.instagram}" target="_blank" rel="noopener">Instagram ↗</a></div>`),
+    cont: sec(t("s_cont"), `<div class="links"><a href="mailto:${y.email}">${E(y.email)}</a><a href="${y.linkedin}" target="_blank" rel="noopener">LinkedIn ↗</a><a href="${y.instagram}" target="_blank" rel="noopener">Instagram ↗</a><a href="cv/Claudia_Ramirez_Mora_CV.pdf" target="_blank" rel="noopener">CV ↓</a></div>`),
   };
   $("#ab").innerHTML = `<div class="col">${secs.info}${secs.hab}</div><div class="col">${secs.exp}${secs.form}${secs.idi}${secs.cont}</div>`;
   $("#ab").addEventListener("click", e => e.stopPropagation());
