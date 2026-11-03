@@ -12,10 +12,10 @@
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Tuchati — Claudia Ramírez"><meta name="twitter:description" content="Web con asistente de IA y ayuda humana para personas extranjeras en España: diseño UX/UI, front-end y SEO técnico."><meta name="twitter:image" content="https://portfolio-three-mu-4veu8kpadj.vercel.app/og/tuchati.jpg">
 <link rel="preload" as="image" href="img/tuchati/portada-logo-v.webp" media="(max-width:680px)" fetchpriority="high">
 <link rel="stylesheet" href="asistente.css?v=1793649407">
-<link rel="stylesheet" href="camelia.css?v=1793649407">
+<link rel="stylesheet" href="camelia.css?v=1793694633">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap"></noscript>
-<link rel="stylesheet" href="base.css?v=1793649407">
+<link rel="stylesheet" href="base.css?v=1793694633">
 <style>
   /* HOJA DE PROYECTO — narrativa. Tipografía callada: etiquetas grises pequeñas y texto en peso normal. */
   .shot{ background:var(--g1); border-radius:6px; overflow:hidden; display:flex; justify-content:center; align-items:flex-end; gap:clamp(14px,3vw,44px); padding:clamp(28px,6vw,84px) clamp(18px,5vw,72px) 0; }
@@ -80,11 +80,11 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 </header>
 <main id="main"></main>
 <script>window.SLUG="tuchati";</script>
-<script src="datos.js?v=1793649061"></script>
+<script src="datos.js?v=1793694838"></script>
 <script src="asistente.js?v=1793649407"></script>
 <script src="capitulos.js?v=1793649823"></script>
-<script src="camelia.js?v=1793649823"></script>
-<script src="comun.js?v=1793649407"></script>
+<script src="camelia.js?v=1793694633"></script>
+<script src="comun.js?v=1793695041"></script>
 <script>
 (function(){
   const D = DATOS, E = PORT.esc, M = PORT, $ = s => document.querySelector(s);
@@ -97,7 +97,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
   const t = PORT.t; $("#todos").textContent = t("todos"); PORT.idioma($("#lang"));
   PORT.quien($("#quien")); $("#todos").href = "index.html";
 
-  const enlaces = [p.sitio ? `<a href="${p.sitio[1]}" target="_blank" rel="noopener">${E(p.sitio[0])} ↗</a>` : "", p.figma ? `<a href="${p.figma[1]}" target="_blank" rel="noopener">Figma ↗</a>` : "", p.protoArriba && p.prototipo ? `<a href="${p.prototipo}" target="_blank" rel="noopener">${t("prototipo")} ↗</a>` : ""].filter(Boolean).join("") || "—";
+  const enlaces = [p.sitio ? `<a href="${p.sitio[1]}" target="_blank" rel="noopener">${E(p.sitio[0])} ↗</a>` : "", ...(p.redes || []).map(r => `<a href="${r[1]}" target="_blank" rel="noopener">${E(r[0])} ↗</a>`), p.figma ? `<a href="${p.figma[1]}" target="_blank" rel="noopener">Figma ↗</a>` : "", p.protoArriba && p.prototipo ? `<a href="${p.prototipo}" target="_blank" rel="noopener">${t("prototipo")} ↗</a>` : ""].filter(Boolean).join("") || "—";
   const meta = `<dl class="mt"><div class="c-p"><dt>${t("proyecto")}</dt><dd>${E(p.nombre)}</dd></div><div class="c-r"><dt>${t("rol")}</dt><dd>${E(p.rol || "—")}</dd></div><div class="c-e"><dt>${t("estado")}</dt><dd>${t("completado")}</dd></div><div class="c-f"><dt>${t("fecha")}</dt><dd>${p.anio}</dd></div>
     <div class="c-h"><dt>${t("herramientas")}</dt><dd>${p.herramientas ? p.herramientas.map(t => `<span>${E(t)}</span>`).join("") : "—"}</dd></div>${p.sinEnlace || (p.protoArriba && !p.prototipo) ? "" : `<div class="c-l"><dt>${t("enlace")}</dt><dd>${enlaces}</dd></div>`}</dl>`;
   const pn = `<div class="pn"><a class="pill" href="${href(prev.slug)}"><span>${t("anterior")}</span><span aria-hidden="true">←</span></a><a class="pill" href="${href(next.slug)}"><span aria-hidden="true">→</span><span>${t("siguiente")}</span></a></div>`;

@@ -87,7 +87,7 @@
   const recarga = (performance.getEntriesByType("navigation")[0] || {}).type === "reload";
   // «hola» en tantos idiomas como caben en la carga; empieza y acaba en castellano
   const HOLA = [["Hola", "es"], ["Hello", "en"], ["Bonjour", "fr"], ["Ciao", "it"], ["Hallo", "de"], ["Olá", "pt"], ["你好", "zh"], ["こんにちは", "ja"], ["Kaixo", "eu"], ["Привет", "ru"], ["مرحبا", "ar", "rtl"], ["Bon dia", "ca"], ["नमस्ते", "hi"], ["Γεια σου", "el"], ["안녕하세요", "ko"], ["Merhaba", "tr"], ["Hej", "sv"], ["Ola", "gl"], ["שלום", "he", "rtl"], ["Aloha", "haw"], ["Moi", "fi"], ["Cześć", "pl"], ["Jambo", "sw"], ["สวัสดี", "th"], ["Szia", "hu"], ["Xin chào", "vi"], ["Salut", "ro"], ["Hola", "es"]];
-  function carga(done, ms = 3600){
+  function carga(done, ms = 2000){
     const quiet = reduced || /[?&]carga=0/.test(location.search) || (visto && !recarga);
     if(quiet){ document.body.classList.remove("cargando"); done && done(); return; }
     const ps = D.proyectos, N = ps.length;
@@ -95,11 +95,12 @@
     el.className = "carga"; el.setAttribute("role", "status"); el.setAttribute("aria-label", t("carga"));
     el.innerHTML = `<div class="ctop" aria-hidden="true"><span>${esc(marca)}</span><span>Portfolio</span></div>
       <div class="c1" aria-hidden="true"><div class="cn"><span id="cn" lang="es">Hola</span></div><div class="cfoto">${ps.map((p, i) => `<div class="cf" data-i="${i}">${mini(p)}</div>`).join("")}</div></div>
+      <div class="chint" aria-hidden="true">${matchMedia("(hover:none)").matches ? (lang === "en" ? "Tap to enter" : "Toca para entrar") : (lang === "en" ? "Click to enter" : "Haz clic para entrar")}</div>
       <div class="cpie" aria-hidden="true"><b id="cp"></b></div>`;
     document.body.classList.add("cargando"); document.body.prepend(el);
     const n = el.querySelector("#cn"), pie = el.querySelector("#cp"), items = [...el.querySelectorAll(".cf")];
     const t0 = performance.now(); let over = false, cur = -1;
-    const out = () => { if(over) return; over = true; el.classList.add("fuera"); document.body.classList.remove("cargando"); setTimeout(() => { el.remove(); done && done(); }, 1050); };
+    const out = () => { if(over) return; over = true; el.classList.add("fuera"); document.body.classList.remove("cargando"); setTimeout(() => { el.remove(); done && done(); }, 750); };
     let g = -1;
     (function tick(now){
       const t = Math.max(0, Math.min((now - t0) / ms, 1));
@@ -107,14 +108,14 @@
       if(gi !== g){ g = gi; n.textContent = HOLA[gi][0]; n.lang = HOLA[gi][1]; n.dir = HOLA[gi][2] || "ltr"; }
       const k = Math.min(N - 1, Math.floor(t * N));
       if(k !== cur){ cur = k; items.forEach((f, i) => f.classList.toggle("on", i === k)); pie.textContent = ps[k].nombre + "  " + String(k + 1).padStart(2, "0") + " / " + String(N).padStart(2, "0"); }
-      if(t < 1) requestAnimationFrame(tick); else setTimeout(out, 420);
+      if(t < 1) requestAnimationFrame(tick); else setTimeout(out, 250);
     })(t0);
     addEventListener("keydown", e => { if(e.key === "Escape") out(); }, { once:true });
     el.addEventListener("click", out);
   }
 
   // Frase de resumen que abre la hoja, justo antes de «Reto» (misma estructura que el resto de secciones)
-  const resumen = p => p.resumen ? `<section class="sec resumen"><h2>${lang === "en" ? "In one sentence" : "En una frase"}</h2><div class="c"><p class="tx2">${esc(p.resumen)}</p></div></section>` : "";
+  const resumen = p => p.resumen ? `<section class="sec resumen"><h2>${lang === "en" ? "Concept" : "Concepto"}</h2><div class="c"><p class="tx2">${esc(p.resumen)}</p></div></section>` : "";
 
   // Cierre de cada hoja: «¿Hablamos?» en grande con el correo y las redes; se coloca justo antes de los botones Anterior / Siguiente
   function contacto(){

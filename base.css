@@ -53,9 +53,10 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 @media (prefers-reduced-motion:reduce){ .dev-screen img{ animation:none; } }
 
 /* first-load: a greeting in many languages, a mini photo of each project, its name. No braces. */
-.carga{ position:fixed; inset:0; z-index:200; background:#fff; transition:transform 1s var(--ease-io); will-change:transform; }
+.carga{ position:fixed; inset:0; z-index:200; background:#fff; transition:transform .7s var(--ease-io); will-change:transform; }
 .carga.fuera{ transform:translateY(-101%); }
 .ctop{ position:absolute; left:var(--pad); right:var(--pad); top:var(--pad); display:flex; justify-content:space-between; font-size:.75rem; letter-spacing:.06em; text-transform:uppercase; color:var(--g3); }
+.chint{ position:absolute; left:0; right:0; bottom:calc(var(--pad) + 28px); text-align:center; font-size:.6875rem; letter-spacing:.06em; text-transform:uppercase; color:var(--g3); }
 .cpie{ position:absolute; left:0; right:0; bottom:var(--pad); display:flex; justify-content:center; font-size:.6875rem; letter-spacing:.06em; text-transform:uppercase; color:var(--g3); } .cpie b{ font-weight:500; color:var(--ink); white-space:pre; }
 .cn{ display:flex; align-items:flex-start; font-weight:200; font-stretch:100%; letter-spacing:-.05em; line-height:.82; font-variant-numeric:tabular-nums; }
 .mini{ position:absolute; inset:0; background:var(--g1); border-radius:10px; overflow:hidden; display:grid; place-items:center; }
