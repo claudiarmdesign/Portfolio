@@ -71,7 +71,7 @@ window.DATOS = {
     {
       slug: "jenim", cover: "img/jenim/principal-h.webp", coverM: "img/jenim/principal-v.webp", nombre: "Je'nim", corto: "Je'nim", tipo: "Académico llevado a producción", cat: "Web de mercadillo online", anio: "2026",
       frase: "El mercadillo digital que solo abre los domingos",
-      rol: "UX Research, UI, identidad visual y front-end", herramientas: ["Figma", "Next.js", "Vercel", "Stripe"],
+      rol: "UX Research, UI, identidad visual y front-end", herramientas: ["Figma", "Next.js", "Vercel", "Supabase", "Stripe"],
       sitio: ["jenim.es", "https://jenim.es"], redes: [["Instagram", "https://www.instagram.com/soyjenim"], ["TikTok", "https://www.tiktok.com/@soyjenim"]], figma: ["Ver diseño en Figma", "https://www.figma.com/design/4QVQwmpj0ukWY51VFLCaND/Claudia.Ram%C3%ADrez-Reto-2-UI?node-id=0-1&t=PtY9MkzniLkmTgyM-1"],
       laptop: ["img/jenim/hf-home-7.full.webp", "img/jenim/hf-product-3.full.webp", "img/jenim/hf-cart-1.full.webp", "img/jenim/hf-home-1.full.webp"],
       movil: "img/jenim/hf-iphone-16-pro-max-1.full.webp",
