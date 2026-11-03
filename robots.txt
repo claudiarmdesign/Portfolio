@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://portfolio-three-mu-4veu8kpadj.vercel.app/sitemap.xml
+Sitemap: https://claudiarm-portfolio.vercel.app/sitemap.xml
