@@ -10,7 +10,7 @@ window.DATOS = {
     sobre: "Soy diseñadora UX/UI y desarrolladora web con la IA como aliada en el proceso.",
     email: "claudiarm.design@gmail.com",
     linkedin: "https://www.linkedin.com/in/claudiaramirezmora",
-    instagram: "https://www.instagram.com/aterrizastudio",
+    instagram: "https://www.instagram.com/claudiarm.design",
     servicios: [
       ["Una web nueva", "De la estructura y el diseño en Figma al desarrollo y el lanzamiento."],
       ["Rediseñar tu web", "Analizo qué falla y renuevo diseño, experiencia y estructura."],
